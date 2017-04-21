@@ -1,0 +1,99 @@
+* {
+    margin: 0px;
+    padding:0px
+}
+body {
+    width: 1076px;
+    margin: 0 auto;
+    background: url(../image/5629514927375932817.jpg) fixed 0 0;
+    background-size: cover;
+}
+
+body, button, input, select, textarea {
+    font: 12px/1.6 "Hiragino Sans GB",STHeiti,"微软黑体","Microsoft YaHei",Helvetica,Arial,serif;
+}
+
+a {
+	cursor: pointer;
+}
+
+header {
+	text-align: center;
+	margin: 30px auto;
+}
+
+header img {
+	height: 128px;
+	width: 128px;
+	border-radius: 50%;
+	border: 6px solid rgba(255,255,255,0.15);
+}
+
+header .userName {
+	font-size: 32px;
+    font-weight: normal;
+    font-style: italic;
+    letter-spacing: 4px;
+    line-height: 42px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.75);
+    color: white;
+}
+
+header .desc {
+	line-height: 24px;
+}
+
+header ul {
+	padding: 20px 0 25px;
+    border-bottom: 1px dotted #7f9397;
+}
+
+header ul li {
+	display: inline-block;
+	margin: 4px 10px;
+    height: 24px;
+}
+header ul li a{
+	color: white;
+}
+hr {
+	margin: 40px 0;
+}
+
+footer {
+	text-align: center;
+	margin: 20px 0 30px;
+}
+/**返回顶部**/
+#goTop {
+    width:50px;
+    height:50px;
+    position: fixed;
+    bottom:30px;
+    right:20px;
+    display: none;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 10px;
+}
+#goTop:after{
+    content: "返回顶部";
+    left: 0;
+    position: absolute;
+    word-break: break-all;
+    background-color: #666;
+    line-height: 1.2;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    padding:2px 0px;
+    opacity: 0.3;
+    -webkit-transition:all .5s ;
+    -moz-transition: all .5s;
+    transition: all .5s;
+    font-size: 18px;
+}
+#goTop:hover::after{
+    top: 0;
+    opacity: 1;
+}
