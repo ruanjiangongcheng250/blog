@@ -1,16 +1,9 @@
-* {
-    margin: 0px;
-    padding:0px
-}
+/*index.css*/
 body {
     width: 1076px;
     margin: 0 auto;
     background: url(../image/5629514927375932817.jpg) fixed 0 0;
     background-size: cover;
-}
-
-body, button, input, select, textarea {
-    font: 12px/1.6 "Hiragino Sans GB",STHeiti,"微软黑体","Microsoft YaHei",Helvetica,Arial,serif;
 }
 
 a {
@@ -59,7 +52,33 @@ header ul li a{
 hr {
 	margin: 40px 0;
 }
+/**section**/
+section .article {
+	margin: 5px auto;
+}
 
+section article {
+	width: 80%;
+	min-height: 500px;
+	max-height: 600px;
+	text-align: center;
+	border: 1px gainsboro dashed;
+	overflow-y: scroll;
+	padding: 20px 30px;
+	margin: 20px auto;
+}
+
+section .article_head {
+	text-align: center;
+}
+
+section .article_footer {
+	height: 200px;
+	border: 1px gainsboro dashed;
+	width: 80%;
+	margin: 20px auto;
+}
+/**footer**/
 footer {
 	text-align: center;
 	margin: 20px 0 30px;
