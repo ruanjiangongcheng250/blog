@@ -22,7 +22,7 @@ header img {
 	border: 6px solid rgba(255,255,255,0.15);
 }
 
-header .userName {
+header .userName a{
 	font-size: 32px;
     font-weight: normal;
     font-style: italic;
@@ -59,13 +59,14 @@ section .article {
 
 section article {
 	width: 80%;
-	min-height: 500px;
-	max-height: 600px;
-	text-align: center;
-	border: 1px gainsboro dashed;
+	/*min-height: 500px;*/
+	max-height: 800px;
+	/*text-align: center;*/
 	overflow-y: scroll;
 	padding: 20px 30px;
 	margin: 20px auto;
+	background-color: whitesmoke;
+	border-radius: 10px;
 }
 
 section .article_head {
@@ -73,10 +74,71 @@ section .article_head {
 }
 
 section .article_footer {
-	height: 200px;
-	border: 1px gainsboro dashed;
+/*	height: 200px;*/
+	/*border: 1px gainsboro dashed;*/
+	background-color: antiquewhite;
 	width: 80%;
 	margin: 20px auto;
+	border-radius: 5px;
+}
+
+section .article_share {
+	display: inline-flex;
+	list-style-type: none;
+	width: 24%;
+	text-align: right;
+	float: left;
+	padding: 10px;
+}
+section .article_share li {
+	margin: 0 10px;
+}
+
+section .article_likes {
+	width: 76%;
+	text-align: left;
+	float: left;
+	padding: 10px 15px;
+}
+
+.inputComments {
+	text-align: center;
+}
+
+.inputComments textarea {
+	resize: none;
+	width: 97%;
+}
+.inputComments p {
+	display: flex;
+	float: right;
+}
+.inputComments a {
+	margin: 5px 10px;
+}
+.commentsList .orderBy {
+	float: right;
+}
+.orderByTimeAsc, .orderByTimeDesc {
+	padding-left: 20px;
+}
+.commentsList {
+	clear: both;
+	margin: 10px 15px;
+	padding: 20px 0;
+}
+
+.commentAvatar {
+	float: left;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+.commentName, .commentTime {
+	width: 80%;
+}
+.commentContent {
+	clear: both;
 }
 /**footer**/
 footer {
