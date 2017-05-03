@@ -8,7 +8,7 @@ $(function() {
     //goTop的显示以及回到顶部
     $('#goTop').backtop();
     //选项卡的切换
-    $('header ul li').on('click',function(){debugger
+    $('header ul li').on('click',function(){
     	var index = $(this).index();
     	$('section>div').addClass('hide').eq(index).removeClass('hide');
     });
