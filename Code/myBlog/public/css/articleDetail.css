@@ -99,6 +99,10 @@ section .article_likes {
 	padding: 10px 15px;
 }
 
+section .article_content img {
+	width: 100%;
+}
+
 .inputComments {
 	text-align: center;
 }
