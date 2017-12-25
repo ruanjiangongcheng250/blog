@@ -180,3 +180,12 @@ footer {
     top: 0;
     opacity: 1;
 }
+
+
+#loading {   
+	position: absolute;
+    top: 50%;
+    left: 45%;
+    display: none;
+}
+

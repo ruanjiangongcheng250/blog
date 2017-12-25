@@ -90,8 +90,11 @@ header .active {
  background: red;	
 }
 
-hr {
-	margin: 40px 0;
+header .loginAndRegiste {
+	text-align: left; color: white;
+}
+header .loginAndRegiste a{
+	color: white;
 }
 /**section**/
 section .article {

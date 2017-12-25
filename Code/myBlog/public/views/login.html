@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta name="baidu-site-verification" content="QUmU9uX87w" />
+		<meta charset="UTF-8">
+		<meta name="keywords" Content="zackon | 张涛">
+		<meta name="description" Content="zackon | 张涛">
+		<title>zackon | 张涛</title>
+		<link href="../css/index.css" rel="stylesheet" type="text/css">
+		<link href="../css/login.css" rel="stylesheet" type="text/css">
+		<link rel="shortcut icon" href="http://imgsize.ph.126.net/?imgurl=http://img0.ph.126.net/EMPZF5jMqMrM8Yj0OXaCeQ==/6632148585629997321.jpg_16x16x0x90.jpg">
+	</head>
+	<body>
+		<div id="login">
+			<h4 class="title login active">登陆</h4>
+			<h4 class="title registe">注册</h4>
+			<div id="loginContainer">
+				<form id="loginForm" method="post" action="login.php">
+					<label for="name">用户名：</label>
+					<input type="text" name="name" id="name" placeholder="用户名/手机号/邮箱">
+					<br>
+					<label for="password">密码：</label>
+					<input type="password" name="password" id="password">
+					<br>
+					<input type="submit" id="loginSubmit" value="登陆" >
+				</form>
+			</div>
+			<div id="registerContainer"  class="hide">
+				<form id="loginForm" method="post" action="registe.php">
+					<label for="userName">用户名：</label>
+					<input type="text" name="name" id="name" placeholder="用户名">
+					<br>
+					<label for="password">密码：</label>
+					<input type="password" name="password" id="password">
+					<br>
+					<label for="Confirmpassword">确认密码：</label>
+					<input type="password" name="Confirmpassword" id="Confirmpassword">
+					<br>
+					<label for="mobile">手机号：</label>
+					<input type="text" name="mobile" id="mobile" placeholder="手机号">
+					<br>
+					<label for="mail">邮箱：</label>
+					<input type="text" name="mail" id="mail" placeholder="邮箱">
+					<br>
+					<input type="submit" id="registeSubmit" value="注册" >
+				</form>
+			</div>
+		</div>	
+		<script src="../js/jquery.min.js"></script>		
+		<script src="../js/login.js"></script>
+	</body>
+</html>
