@@ -61,6 +61,12 @@ section .article {
 	margin: 5px auto;
 }
 
+header .loginAndRegiste {
+	text-align: left; color: white;
+}
+header .loginAndRegiste a{
+	color: white;
+}
 section article {
 	width: 80%;
 	/*min-height: 500px;*/
@@ -189,3 +195,6 @@ footer {
     display: none;
 }
 
+#hasLogin {
+	display: none;
+}

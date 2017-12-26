@@ -13,6 +13,10 @@
 	</head>
 	<body>
         <header>
+        	<p class="loginAndRegiste">
+        		<span id="noLogin"><a href="login.html"><span id="login">登录</span></a>&nbsp;&nbsp;&nbsp;<a href="login.html?type=registe"><span id="registe">注册</span></a></span>
+        		<span id="hasLogin"><a href="javascript:void(0)"><span id="userName" >name</span></a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"><span id="loginOut">退出登录</span></a>&nbsp;&nbsp;&nbsp;<a href="index.html"><span>首页</span></a></span>
+        	</p>
         	<hr>
         	<a href="index.html"><img src="../image/avatar.jpg"></img></a>
         	<h1 class="userName"><a>张涛 | zackon</a></h1>
@@ -30,7 +34,13 @@
                {{#data[0].content}}
            	</article>
            	   <div class="article_footer">
-                	<div class="article_likes">zackon觉得很赞</div>
+                	<div class="article_likes">
+                		{{if data[0].hasLike}}
+                		    <img id="likeOrUnlike" src="../icon/like.png" /> <span style="display: none;">&nbsp;&nbsp;&nbsp; zackon等<span id="numberOfLikes">{{data[0].likes.length}}</span>人也觉得文章很赞！</span>
+                		{{else}}
+                		    <img id="likeOrUnlike" src="../icon/unlike.png" /> <span style="display: none;">&nbsp;&nbsp;&nbsp; zackon等<span id="numberOfLikes">{{data[0].likes.length}}</span>人也觉得文章很赞！</span>
+                		{{/if}}
+                	</div>
                 	<ul class="article_share">
                 		<li><a>QQ</a></li>
                 		<li><a>微信</a></li>
@@ -46,7 +56,7 @@
 	                	{{each data[0].comment}}
 		                	<div class="comment">
 		                		<div>
-		                			<img class="commentAvatar" src="../image/img5.jpg" width="50" height="50" />
+		                			<img class="commentAvatar" src="{{$value.author_avator}}" width="50" height="50" />
 		                			<div style="width: 80%; float:left;">
 		                				<p class="commentName">{{$value.author}}</p>
 		                				<p class="commentTime">{{$value.time}}</p>

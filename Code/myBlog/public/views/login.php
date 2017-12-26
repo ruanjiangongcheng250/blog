@@ -15,8 +15,20 @@
 				$password = $_POST['password'];
 				
 				$result = mysql_query("SELECT * FROM `user` WHERE (name = '$name' OR mobile='$name' OR mail='$name') AND password = '$password'");
+				while($row = mysql_fetch_object($result)){
+					$author_avator = $row->avator;
+					$author_id = $row->id;
+				}
 				if(mysql_num_rows($result)){
 					setcookie('name', $name);
+					setcookie('avator', $author_avator);
+					setcookie('author_id', $author_id);
+					$resultOfLikes = mysql_query("SELECT * FROM `likesofarticle` WHERE author_id='$author_id'");
+					$arrLikes = array();
+					while($row = mysql_fetch_array($resultOfLikes)){
+					    array_push($arrLikes, $row['article_id']);
+					}
+					setcookie('likesofarticle', implode(',',$arrLikes));
 					header("Location: index.html?name=".$name); 
 					exit;
 				}else{

@@ -93,7 +93,7 @@ $(function() {
 	    getCookie: function (name) {
 	        var arr, reg = new RegExp('(^|)' + name + '=([^;]*)(;|$)');
 	        if (arr = document.cookie.match(reg)) {
-	            return unescape(arr[2]);
+	            return arr[2];
 	        } else {
 	            return null;
 	        }
@@ -108,11 +108,11 @@ $(function() {
 	    }
 	};
     /*用户登录的操作*/
-	if(location.search.indexOf('name') > -1 && CookieParser.getCookie('name')){
-		var name = location.search.substr(location.search.indexOf('=') + 1);
+	if(CookieParser.getCookie('name')){
+		var name = CookieParser.getCookie('name');
 		$('#noLogin').hide();
 		$('#hasLogin').show();
-		$('#userName').text(decodeURI(name));
+		$('#userName').text(decodeURIComponent(name));
 	}
 	
 	//退出登录
