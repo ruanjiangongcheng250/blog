@@ -14,13 +14,13 @@
 				$result = mysql_query("SELECT * FROM article WHERE id = '".$_GET['id']."'");
 				$arrComment = array();
 				$resultComment = mysql_query("SELECT * FROM comment WHERE id = '".$_GET['id']."' order by time desc");
-				while($row = mysql_fetch_array($resultComment))
+				/*while($row = mysql_fetch_array($resultComment))
 				{
 					array_push($arrComment,array('content'=> $row['content'],
 												 'time'=> $row['time'],
 												 'author'=> $row['author'],
 					                             ));
-				}
+				}*/
 				$arr = array();
                 while($row = mysql_fetch_array($result))
 				{
@@ -29,13 +29,12 @@
 										  'description'=> $row['description'], 
 										  'time'=> $row['time'], 
 										  'author'=> $row['author'], 
-										  'avator'=> $row['avator'],
 										  'support'=> $row['support'],
 										  'watch'=> $row['watch'],
 										  'comment'=> $row['comment'],
 										  'type'=> $row['type'],
 										  'content'=> $row['content'],
-										  'comment'=> $arrComment
+										  /*'comment'=> $arrComment*/
 										  ));
 				}  
 				echo json_encode($arr, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT); 

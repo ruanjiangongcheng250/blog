@@ -1,0 +1,43 @@
+文章数据库表
+字段      类型       说明
+ id       int        唯一
+ name     char    文章的名称
+author    char       作者
+ time     date     创建日期
+content   char     文章内容
+ type     char     文章类型
+ support  int      点赞数目
+ comment  int       评论数
+  read    int       观看数
+ avator   char      作者头像
+
+
+评论数据库表
+字段      类型       说明
+id        int      与文章想关联
+content   char      评论的内容
+author    char       评论者
+author_avator   评论者头像  有默认
+time      date      评论时间
+
+
+用户表(管理端修改以及前端展示)
+字段      类型       说明
+id        int       唯一
+avator    char       头像
+name      char       名称
+name_E    char       英文名
+description char     描述
+
+
+
+注册
+字段      类型       说明
+username   char        唯一
+password   char        密码
+confirmPassword char   确认密码
+telephone     int     手机号
+
+
+
+SEO表

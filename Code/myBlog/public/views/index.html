@@ -11,9 +11,11 @@
 		<link href="../css/index.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
+		<img style="position: absolute; top: 50%; left: 45%;" src="../image/loading.gif" id="loading">
         <header>
         	<p class="loginAndRegiste">
-        		<a href="login.html"><span id="login">登录</span></a>&nbsp;&nbsp;&nbsp;<a href="login.html?type=registe"><span id="registe">注册</span></a>
+        		<span id="noLogin"><a href="login.html"><span id="login">登录</span></a>&nbsp;&nbsp;&nbsp;<a href="login.html?type=registe"><span id="registe">注册</span></a></span>
+        		<span id="hasLogin"><a href="javascript:void(0)"><span id="userName" >name</span></a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"><span id="loginOut">退出登录</span></a></span>
         	</p>
         	<hr>
         	<a href="index.html"><img src="../image/avatar.jpg"></img></a>
@@ -89,7 +91,6 @@
         	</div>
         	<p>版权所有 © ICP备17022551号   技术支持：zackon科技</p>
         </footer>
-        <img src="../image/loading.gif" id="loading">
         <script src="../js/jquery.min.js"></script>
         <script src="../js/jQuery.lazy.js"></script>
         <script src="../js/backtop.js"></script>

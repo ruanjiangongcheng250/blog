@@ -16,8 +16,9 @@
 				$mail = $_POST['mail'];
 				$mobile = $_POST['mobile'];
 				$result = mysql_query("INSERT INTO `user`(`name`, `mobile`, `password`, `mail`) VALUES ('$name','$mobile','$password','$mail')");
+				setcookie('name', $name);
 				//echo json_encode(array("code"=>200));
 				mysql_close($conn);
-				header("Location: login.html"); 
+				header("Location: index.html?name=".$name); 
 				exit;
 ?>

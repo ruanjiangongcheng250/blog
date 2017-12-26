@@ -82,6 +82,52 @@ $(function() {
     	$('#loading').hide();
     }
     
+    //操作cookie的方法
+    CookieParser = {
+	    setCookie: function (name, value, expireDays) {
+	        if (expireDays == null) expireDays = 30;
+	        var exp = new Date();
+	        exp.setTime(exp.getTime() + expireDays * 24 * 60 * 60 * 1000);
+	        document.cookie = name + '=' + escape(value) + ';expires=' + exp.toGMTString();
+	    },
+	    getCookie: function (name) {
+	        var arr, reg = new RegExp('(^|)' + name + '=([^;]*)(;|$)');
+	        if (arr = document.cookie.match(reg)) {
+	            return unescape(arr[2]);
+	        } else {
+	            return null;
+	        }
+	    },
+	    delCookie: function (name) {
+	        var exp = new Date();
+	        exp.setTime(exp.getTime() - 1);
+	        var val = this.getCookie(name);
+	        if (val != null) {
+	            document.cookie = name + '=' + val + ';expires=' + exp.toGMTString();
+	        }
+	    }
+	};
+    /*用户登录的操作*/
+	if(location.search.indexOf('name') > -1 && CookieParser.getCookie('name')){
+		var name = location.search.substr(location.search.indexOf('=') + 1);
+		$('#noLogin').hide();
+		$('#hasLogin').show();
+		$('#userName').text(decodeURI(name));
+	}
+	
+	//退出登录
+	$('#loginOut').on('click', function(){
+		$('#noLogin').show();
+		$('#hasLogin').hide();
+		$.ajax({
+			type:"post",
+			url:"loginOut.php",
+			async:true,
+			success: function(){
+				
+			}
+		});
+	});
 });
 
 

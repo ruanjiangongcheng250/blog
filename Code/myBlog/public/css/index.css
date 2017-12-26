@@ -273,3 +273,7 @@ footer {
     top: 0;
     opacity: 1;
 }
+
+#hasLogin {
+	display: none;
+}

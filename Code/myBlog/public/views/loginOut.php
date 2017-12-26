@@ -10,19 +10,6 @@
 				{
 					die('Could not connect: ' . mysql_error());
 				}
-				mysql_select_db("blog", $conn);
-				$name = $_POST['name'];
-				$password = $_POST['password'];
-				
-				$result = mysql_query("SELECT * FROM `user` WHERE (name = '$name' OR mobile='$name' OR mail='$name') AND password = '$password'");
-				if(mysql_num_rows($result)){
-					setcookie('name', $name);
-					header("Location: index.html?name=".$name); 
-					exit;
-				}else{
-					header("Location: login.html"); 
-					exit;
-				}
-				mysql_close($conn);
+				setcookie('name','',time()-3600);
 				
 ?>
