@@ -19,3 +19,6 @@ $('#login h4').on('click',function(){
 		$('#loginContainer').hide();
 	}
 });
+
+//注册验证表单
+

@@ -12,11 +12,16 @@ $(function() {
     	var type = $(this).children('a').data('name');
     	$('header ul li a').removeClass('active');
     	$(this).children('a').addClass('active');
+    	if(type == 'picture'){  //相册暂时隐藏搜索功能
+    		$('#searchContainer').hide();
+    	}else{
+    		$('#searchContainer').show();
+    	}
     	var index = $(this).index();
     	$('section>div').addClass('hide').eq(index).removeClass('hide');
     	$.ajax({
     	url:'index.php',
-    	data: {type: type},
+    	data: {type: type, keyword: null},
     	type: 'get',
     	success: function(result){
     		var html = template('articleTpl', {data:result}); 
@@ -31,7 +36,7 @@ $(function() {
     $.ajax({
     	url:'index.php',
     	type: 'get',
-    	data: {type: null},
+    	data: {type: null, keyword: null},
     	success: function(result){
     		loadingHide();
     		var html = template('articleTpl', {data:result}); 
@@ -127,6 +132,27 @@ $(function() {
 				
 			}
 		});
+	});
+	
+	//搜索文章
+	$('#search').on('click', function(){
+		var type = $('header ul li').children('a.active').data('name');
+		var keyword = $('#keyword').val();
+		$.ajax({
+	    	url:'index.php',
+	    	type: 'get',
+	    	data: {type: type, keyword: keyword},
+	    	success: function(result){
+	    		loadingHide();
+	    		var html = template('articleTpl', {data:result}); 
+	    		if(type){
+	    			$('.'+type).html(html);
+	    		}else{
+	    			$('.article').html(html);
+	    		}
+				
+    	    }
+        });
 	});
 });
 

@@ -12,9 +12,17 @@
 				}
 				mysql_select_db("blog", $conn);
 				if($_GET['type']){
-					$result = mysql_query("SELECT * FROM article WHERE type = '".$_GET['type']."' ORDER BY time DESC");
+					if($_GET['keyword']){
+						$result = mysql_query("SELECT * FROM article WHERE type = '".$_GET['type']."' and (name like '%".$_GET['keyword']."%' OR author like '%".$_GET['keyword']."%') ORDER BY time DESC");
+					}else{
+						$result = mysql_query("SELECT * FROM article WHERE type = '".$_GET['type']."' ORDER BY time DESC");
+					}
 				}else{
-					$result = mysql_query("SELECT * FROM article ORDER BY time DESC");
+					if($_GET['keyword']){
+						$result = mysql_query("SELECT * FROM article WHERE name like '%".$_GET['keyword']."%' OR author like '%".$_GET['keyword']."%' ORDER BY time DESC");
+					}else{
+						$result = mysql_query("SELECT * FROM article ORDER BY time DESC");
+					}
 				}
 				$arr = array();
                 while($row = mysql_fetch_array($result))
