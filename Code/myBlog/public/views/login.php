@@ -13,6 +13,7 @@
 				mysql_select_db("blog", $conn);
 				$name = $_POST['name'];
 				$password = $_POST['password'];
+				$article_id = $_POST['article_id'];
 				
 				$result = mysql_query("SELECT * FROM `user` WHERE (name = '$name' OR mobile='$name' OR mail='$name') AND password = '$password'");
 				while($row = mysql_fetch_object($result)){
@@ -29,7 +30,11 @@
 					    array_push($arrLikes, $row['article_id']);
 					}
 					setcookie('likesofarticle', implode(',',$arrLikes));
-					header("Location: index.html?name=".$name); 
+					if(empty($article_id)){
+						header("Location: index.html"); 
+					}else{
+						header("Location: detail.html?id=".$article_id); 
+					}
 					exit;
 				}else{
 					header("Location: login.html"); 

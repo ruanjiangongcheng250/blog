@@ -16,7 +16,7 @@ $(function() {
     	data: {id: article_id},
     	success: function(result){
     		loadingHide();
-    		var likesofarticle = CookieParser.getCookie('likesofarticle') ? CookieParser.getCookie('likesofarticle').split(',') : [];
+    		var likesofarticle = CookieParser.getCookie('likesofarticle') ? decodeURIComponent(CookieParser.getCookie('likesofarticle')).split(',') : [];
     		for(var i =0; i<likesofarticle.length; i++){
     			if(likesofarticle[i] == article_id){ //说明当前用户已经喜欢了此文章
     				result[0].hasLike = true;
@@ -29,7 +29,8 @@ $(function() {
 		    $('.btn-comment').on('click',function(){
 		    	//校验是否登录
 		    	if(!CookieParser.getCookie('name')){
-		    		location.href = 'login.html';
+		    		location.href = 'login.html?article_id='+ article_id;
+		    		return;
 		    	}
 		    	var time = new Date().Format("yyyy-MM-dd hh:mm:ss");
 		    	var content = $('.inputComments textarea').val();
@@ -63,7 +64,7 @@ $(function() {
 		    $('#likeOrUnlike').on('click',function(){
 		    	//校验是否登录
 		    	if(!CookieParser.getCookie('name')){
-		    		location.href = 'login.html';
+		    		location.href = 'login.html?article_id='+ article_id;
 		    		return;
 		    	}
 		    	var commitData = {};

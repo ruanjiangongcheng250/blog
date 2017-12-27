@@ -1,3 +1,7 @@
+if(location.search.indexOf('article_id') > -1){
+	var article_id = location.search.substr(12);
+	$('input[name=article_id]').val(article_id);
+}
 if(location.search.indexOf('registe') > -1){
 	$('#login h4.registe').addClass('active');
 	$('#login h4.login').removeClass('active');
