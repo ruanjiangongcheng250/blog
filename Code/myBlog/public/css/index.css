@@ -23,7 +23,7 @@
 .icon-guankan:before { content: "\e602"; }
 
 body {
-    width: 1076px;
+    width: 80%;
     margin: 0 auto;
     background: url(../image/5629514927375932817.jpg) fixed 0 0;
     background-size: cover;

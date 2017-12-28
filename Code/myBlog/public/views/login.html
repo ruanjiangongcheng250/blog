@@ -8,42 +8,72 @@
 		<title>zackon | 张涛</title>
 		<link href="../css/index.css" rel="stylesheet" type="text/css">
 		<link href="../css/login.css" rel="stylesheet" type="text/css">
+		<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link rel="shortcut icon" href="http://imgsize.ph.126.net/?imgurl=http://img0.ph.126.net/EMPZF5jMqMrM8Yj0OXaCeQ==/6632148585629997321.jpg_16x16x0x90.jpg">
 	</head>
-	<body>
+	<body style="width: 100%;">
 		<div id="login">
 			<h4 class="title login active">登陆</h4>
 			<h4 class="title registe">注册</h4>
 			<div id="loginContainer">
-				<form id="loginForm" method="post" action="login.php">
-					<label for="name">用户名：</label>
-					<input type="text" name="name" id="name" placeholder="用户名/手机号/邮箱">
-					<br>
-					<label for="password">密码：</label>
-					<input type="password" name="password" id="password">
-					<br>
+				<form role="form" class="form-horizontal" id="loginForm" method="post" action="login.php">
+					<div class="form-group">
+						<label for="name" class=" col-sm-3  control-label" >用户名：</label>
+						<div class="col-sm-8">
+							<input type="text" name="name" id="name" class="form-control" placeholder="用户名/手机号/邮箱">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="name" class="col-sm-3  control-label" >密码：</label>
+						<div class="col-sm-8">
+							<input type="password" name="password" id="password" class="form-control" >
+						</div>
+					</div>
 					<input type="hidden" name="article_id">
-					<input type="submit" id="loginSubmit" value="登陆" >
+					<div class="form-group">
+						<div class="col-sm-12">
+							<button type="submit" id="loginSubmit" class="btn btn-default">登录</button>
+						</div>
+					</div>
 				</form>
 			</div>
-			<div id="registerContainer"  class="hide">
-				<form id="loginForm" method="post" action="registe.php">
-					<label for="name">用户名：</label>
-					<input type="text" name="name" id="name" placeholder="用户名">
-					<br>
-					<label for="password">密码：</label>
-					<input type="password" name="password" id="password">
-					<br>
-					<label for="Confirmpassword">确认密码：</label>
-					<input type="password" name="Confirmpassword" id="Confirmpassword">
-					<br>
-					<label for="mobile">手机号：</label>
-					<input type="text" name="mobile" id="mobile" placeholder="手机号">
-					<br>
-					<label for="mail">邮箱：</label>
-					<input type="text" name="mail" id="mail" placeholder="邮箱">
-					<br>
-					<input type="submit" id="registeSubmit" value="注册" >
+			<div id="registerContainer" class="hide">
+				<form id="loginForm" role="form" class="form-horizontal" method="post" action="registe.php">
+					<div class="form-group">
+						<label for="name" class=" col-sm-3  control-label" >用户名：</label>
+						<div class="col-sm-8">
+							<input type="text" name="name" id="name" class="form-control" placeholder="用户名">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="name" class="col-sm-3  control-label" >密码：</label>
+						<div class="col-sm-8">
+							<input type="password" name="password" id="password" class="form-control" >
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="name" class="col-sm-3  control-label" >确认密码：</label>
+						<div class="col-sm-8">
+							<input type="password" name="Confirmpassword" id="Confirmpassword" class="form-control" >
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="mobile" class=" col-sm-3  control-label" >手机号：</label>
+						<div class="col-sm-8">
+							<input type="text" name="mobile" id="mobile" class="form-control" placeholder="手机号">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="mail" class=" col-sm-3  control-label" >邮箱：</label>
+						<div class="col-sm-8">
+							<input type="text" name="mail" id="mail" class="form-control" placeholder="邮箱">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12">
+							<button type="submit" id="registeSubmit" class="btn btn-default">注册</button>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>	

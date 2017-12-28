@@ -1,6 +1,6 @@
 #login {
-	width: 400px;
-    margin: 60px auto 0;
+	width: 40%;
+    margin: 90px auto 0;
     padding: 50px 50px 30px;
     background-color: #fff;
     border-radius: 4px;
@@ -19,18 +19,11 @@
 	line-height: 35px;
 	background-color: gray;
 }
-#login .hide {
-	display: none;
-}
 #login h4.active {
 	background-color: red;
 }
 #loginForm {
 	text-align: center;
-}
-
-#loginForm input {
-	margin-top: 30px;
 }
 
 #loginSubmit, #registeSubmit {
@@ -48,4 +41,6 @@
     clear: both;
 }
 
-
+#loginContainer, #registerContainer {
+	margin-top: 100px;
+}

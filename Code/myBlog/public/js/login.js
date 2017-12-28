@@ -12,11 +12,11 @@ $('#login h4').on('click',function(){
 	$(this).siblings().removeClass('active');
 	$(this).addClass('active');
 	if($(this).hasClass('login')){
-		$('#registerContainer').hide();
-		$('#loginContainer').show();
+		$('#registerContainer').addClass('hide');
+		$('#loginContainer').removeClass('hide');
 	}else{
-		$('#registerContainer').show();
-		$('#loginContainer').hide();
+		$('#registerContainer').removeClass('hide');
+		$('#loginContainer').addClass('hide');
 	}
 });
 
