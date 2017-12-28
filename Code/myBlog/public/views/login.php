@@ -31,14 +31,12 @@
 					}
 					setcookie('likesofarticle', implode(',',$arrLikes));
 					if(empty($article_id)){
-						header("Location: index.html"); 
+						echo json_encode(array("code"=>200,"url"=>"index.html"),JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 					}else{
-						header("Location: detail.html?id=".$article_id); 
+						echo json_encode(array("code"=>200,"url"=>"detail.html?id=".$article_id),JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 					}
-					exit;
 				}else{
-					header("Location: login.html"); 
-					exit;
+					echo json_encode(array("code"=>404,"url"=>"login.html"),JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 				}
 				mysql_close($conn);
 				

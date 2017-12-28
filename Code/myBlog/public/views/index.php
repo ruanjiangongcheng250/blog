@@ -32,7 +32,6 @@
 										  'description'=> $row['description'], 
 										  'time'=> $row['time'], 
 										  'author'=> $row['author'], 
-//										  'avator'=> $row['avator'],
 										  'support'=> $row['support'],
 										  'watch'=> $row['watch'],
 										  'comment'=> $row['comment'],

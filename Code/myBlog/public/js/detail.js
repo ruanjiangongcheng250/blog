@@ -10,6 +10,8 @@ $(function() {
     var article_id = location.search.substr(4);
     //根据id获取文章详情
     loadingShow();
+    //修改登录的url
+    $('#noLogin a').eq(0).attr('href','login.html?article_id='+article_id);
     $.ajax({
     	url:'detail.php',
     	type: 'get',
