@@ -18,7 +18,7 @@ $(function() {
     		$('#searchContainer').show();
     	}
     	var index = $(this).index();
-    	$('section>div').addClass('hide').eq(index).removeClass('hide');
+    	$('section>div:not("#myModal")').addClass('hide').eq(index).removeClass('hide');
     	$.ajax({
     	url:'../php/index.php',
     	data: {type: type, keyword: null},
@@ -26,6 +26,7 @@ $(function() {
     	success: function(result){
     		var html = template('articleTpl', {data:result}); 
 			$('.'+type).html(html);
+			editOrDeleteArticle(result);
     	}
     });
     });
@@ -41,6 +42,7 @@ $(function() {
     		loadingHide();
     		var html = template('articleTpl', {data:result}); 
 			$('.article').html(html);
+			editOrDeleteArticle(result);
 			 //通过点击article_tag 切换选项卡
 	    	$('.article_tag').on('click',function(){
 	    	var tag = $(this).data('tag');
@@ -150,10 +152,40 @@ $(function() {
 	    		}else{
 	    			$('.article').html(html);
 	    		}
-				
+				editOrDeleteArticle(result);
     	    }
         });
 	});
+	
+	function editOrDeleteArticle (result){
+		if(CookieParser.getCookie('name')){  //判断登录用户是否可编辑 删除文章
+			result.forEach(function(item,index){
+				if(item.author == CookieParser.getCookie('name')){
+				    $('[data-articleid='+item.id+'] .article_content_head button').removeClass('hide');
+				    $('.modal .confirmDeleteBtn').on('click', function(){
+				    	//删除文章
+				    	var article_id = $(this).data('articleid');
+						$.ajax({
+							type:"post",
+							data: {id: article_id},
+							url:"../php/deleteArticle.php",
+							async:true,
+							success:function(result){
+								if(result.code == 200){
+									$('article[data-articleid='+article_id+']').hide('slow');
+								}
+							}
+						});
+				    })
+				}
+			});
+			$('#myModal').on('show.bs.modal', function(event){
+				var button = $(event.relatedTarget);
+  				var article_id = button.data('articleid');
+		    	$(this).find('.confirmDeleteBtn').data('articleid',article_id);
+		    });
+		}
+	}
 });
 
 

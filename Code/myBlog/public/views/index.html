@@ -68,21 +68,50 @@
            </div>
            <div class="note hide">
            </div>
+	       <!-- 模态框 -->
+			  <div class="modal fade" id="myModal">
+			   <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <div class="modal-title">
+                           <button type="button" class="close" data-dismiss="modal">
+                               <span>&times</span>
+                           </button>
+                           <h4>删除后不可恢复，确认删除？</h4>
+                       </div>
+                   </div>
+                   <div class="modal-body text-right">
+                       <button class="btn btn-primary btn-sm" data-dismiss="modal">取消</button>
+                       <button class="btn btn-danger btn-sm confirmDeleteBtn"  data-dismiss="modal">确定</button>
+                   </div>
+	               </div>
+	           </div>
+			  </div>
             <script id="articleTpl" type="text/html">
-        		{{each data}} 
-	           	  <article class="article_content">
-	           	  	<div class="article_content_head">
-	           	  		<p><a><img src="../image/avatar.jpg"/></a><span class="article_author"><a>zackon</a></span><span class="article_time">{{$value.time}}</span></p>
-	           	  	    <p class="article_title" ><a href="detail.html?id={{$value.id}}">{{$value.name}}</a></p>
-	           	  	</div>
-	           	  	<div class="article_abstract">
-	                    {{$value.description}}...
-	           	    </div>
-	           	    <div class="article_contnet_footer">
-	           	    	<p><span ><a class="article_tag" data-tag="{{$value.type}}">{{$value.type}}</a></span><a><i class="icon iconfont">&#xe602;</i>{{$value.watch}}</a><a><i class="icon iconfont">&#xe623;</i>{{$value.comment}}</a><a><i class="icon iconfont">&#xe600;</i>{{$value.support}}<a></p>
-	           	    </div>
-	           	  </article>
-	           	{{/each}}
+            	{{if data[0]}}
+	        		{{each data}} 
+		           	  <article class="article_content" data-articleid = {{$value.id}}>
+		           	  	<div class="article_content_head">
+		           	  		<p>
+		           	  			<a><img src="../image/avatar.jpg"/></a>
+		           	  			<span class="article_author"><a>{{$value.author}}</a></span>
+		           	  			<span class="article_time">{{$value.time}}</span>
+		           	  			<button type="button" class="btn btn-danger hide deleteArticle" style="margin-left: 5px;" data-articleid = {{$value.id}} data-toggle="modal" data-target="#myModal">删除</button>
+		           	  			<button type="button" class="btn btn-primary hide editArticle"  data-articleid = {{$value.id}}>编辑</button>
+		           	  		</p>
+		           	  	    <p class="article_title" ><a href="detail.html?id={{$value.id}}">{{$value.name}}</a></p>
+		           	  	</div>
+		           	  	<div class="article_abstract">
+		                    {{$value.description}}...
+		           	    </div>
+		           	    <div class="article_contnet_footer">
+		           	    	<p><span ><a class="article_tag" data-tag="{{$value.type}}">{{$value.type}}</a></span><a><i class="icon iconfont">&#xe602;</i>{{$value.watch}}</a><a><i class="icon iconfont">&#xe623;</i>{{$value.comment}}</a><a><i class="icon iconfont">&#xe600;</i>{{$value.support}}<a></p>
+		           	    </div>
+		           	  </article>
+		           	{{/each}}
+	           	{{else}}
+	           	     <p style="color: white;">暂无文章...</p>
+	           	{{/if}}
            </script> 
         </section>
         <footer>
@@ -98,5 +127,6 @@
         <script src="../js/template.js"></script>
         <script src="../js/jquery.alerts.js"></script>
         <script src="../javascript/index.js"></script>
+        <script src="../js/bootstrap.js"></script>
 	</body>
 </html>
