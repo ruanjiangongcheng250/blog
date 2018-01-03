@@ -26,8 +26,13 @@ CookieParser = {
         }
     }
 };
-var article_id = location.search.substr(9);
+var article_id = location.search.substr(11);
 $('#author').val(CookieParser.getCookie('name'));
+//选择标签
+$('.article_label button').on('click', function(index,item){
+	$(this).siblings().removeClass('btn-danger');
+	$(this).addClass('btn-danger');
+});
 if(article_id){ //编辑文章  需要回写之前的内容
 	$.ajax({
 		type:"get",
@@ -48,6 +53,49 @@ if(article_id){ //编辑文章  需要回写之前的内容
 		}
 	});
 }else{// 新增文章
-	 
+	 $('.addOrEditArticle h1').text('新建文章');
 }
+
+//点击保存文章
+$('#saveArticle').on('click', function(){
+	var commitData = {};
+	commitData.id = article_id;
+	commitData.author = CookieParser.getCookie('name');
+	commitData.name = $('.addOrEditArticle #name').val();
+	commitData.time = $('.addOrEditArticle #time').val();
+	commitData.type = $('.article_label .btn-danger').data('type');
+	commitData.content = UE.getEditor('editor').getContent();
+	commitData.description = UE.getEditor('editor').getContentTxt().substr(0,200);
+	//验证题目，类型，内容，日期不能为空, 纯文本内容不能少于200字符
+	if(!commitData.name){
+		jAlert('文章题目不能为空', '提示');
+		return;
+	}
+	if(!commitData.type){
+		jAlert('文章标签不能为空', '提示');
+		return;
+	}
+	if(!commitData.time){
+		jAlert('日期不能为空', '提示');
+		return;
+	}
+	if(!commitData.content){
+		jAlert('文章内容不能为空', '提示');
+		return;
+	}
+	if(UE.getEditor('editor').getContentTxt().length < 200){
+		jAlert('文章内容不能少于200字', '提示');
+		return;
+	}
+	$.ajax({
+		url: '../php/addOrEditArticle.php',
+		type: 'post',
+		data: commitData,
+		success: function(result){
+			if(result.code == 200){
+				location.href = 'index.html';
+			}
+		}
+	});
+});
 

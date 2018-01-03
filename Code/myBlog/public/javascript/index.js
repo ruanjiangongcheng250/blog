@@ -162,8 +162,8 @@ $(function() {
 			result.forEach(function(item,index){
 				if(item.author == CookieParser.getCookie('name')){
 				    $('[data-articleid='+item.id+'] .article_content_head button').removeClass('hide');
+				    //删除文章
 				    $('.modal .confirmDeleteBtn').on('click', function(){
-				    	//删除文章
 				    	var article_id = $(this).data('articleid');
 						$.ajax({
 							type:"post",
@@ -176,7 +176,13 @@ $(function() {
 								}
 							}
 						});
-				    })
+				    });
+				    
+				    //编辑文章
+				    $('.editArticle').on('click', function(e){
+				    	var article_id = $(this).data('articleid');
+				    	location.href = 'addOrEditArticle.html?articleid='+article_id;
+				    });
 				}
 			});
 			$('#myModal').on('show.bs.modal', function(event){
