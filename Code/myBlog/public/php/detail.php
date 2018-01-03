@@ -1,8 +1,13 @@
 	<?php
 				include 'base.php';
+				$timeOrder = $_GET['timeOrder'];
 				$result = mysql_query("SELECT * FROM article WHERE id = '".$_GET['id']."'");
 				$arrComment = array();
-				$resultComment = mysql_query("SELECT * FROM comment WHERE article_id = '".$_GET['id']."' order by time desc");
+				if(!empty($timeOrder) && $timeOrder == 1){
+					$resultComment = mysql_query("SELECT * FROM comment WHERE article_id = '".$_GET['id']."' order by time asc");
+				}else{
+					$resultComment = mysql_query("SELECT * FROM comment WHERE article_id = '".$_GET['id']."' order by time desc");
+				}
 				while($row = mysql_fetch_array($resultComment))
 				{
 					array_push($arrComment,array('content'=> $row['content'],

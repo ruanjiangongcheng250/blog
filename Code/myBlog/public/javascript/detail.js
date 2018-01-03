@@ -15,7 +15,7 @@ $(function() {
     $.ajax({
     	url:'../php/detail.php',
     	type: 'get',
-    	data: {id: article_id},
+    	data: {id: article_id, timeOrder: 0},
     	success: function(result){
     		loadingHide();
     		var likesofarticle = CookieParser.getCookie('likesofarticle') ? decodeURIComponent(CookieParser.getCookie('likesofarticle')).split(',') : [];
@@ -25,10 +25,12 @@ $(function() {
     				break;
     			}
     		}
-    		var html = template('articleDetailTpl', {data:result}); 
-			$('.article').html(html);
+    		var contentHtml = template('articleDetailTpl', {data:result[0].content}); 
+    		var commentHtml = template('atricleCommentTpl', {data:result}); 
+			$('.article').html(contentHtml);
+			$('.article').append(commentHtml);
 			//发表评论
-		    $('.btn-comment').on('click',function(){
+		    $('.article').on('click','.btn-comment',function(){
 		    	//校验是否登录
 		    	if(!CookieParser.getCookie('name')){
 		    		location.href = 'login.html?article_id='+ article_id;
@@ -55,15 +57,34 @@ $(function() {
 		    		success: function(result){
 		    			if(result && result.code == 200){
 		    				jAlert('已成功评论','提示',function(){
-		    					location.reload();
+		    					$.ajax({
+						    		url: '../php/detail.php',
+						    		type: 'get',
+						    		data: {id: article_id, timeOrder: 0},
+						    		success: function(result){
+						    			var likesofarticle = CookieParser.getCookie('likesofarticle') ? decodeURIComponent(CookieParser.getCookie('likesofarticle')).split(',') : [];
+							    		for(var i =0; i<likesofarticle.length; i++){
+							    			if(likesofarticle[i] == article_id){ //说明当前用户已经喜欢了此文章
+							    				result[0].hasLike = true;
+							    				break;
+							    			}
+							    		}
+						    			var commentHtml = template('atricleCommentTpl', {data:result});
+						    			$('.article_footer').remove();
+						    			$('.article').append(commentHtml);
+						    		}
+						    	})
 		    				});
 		    			}
 		    		}
 		    	})
 		    });
-		    
+		    //清空
+		    $('.article').on('click', '.btn-reset', function(){
+		    	$('.inputComments textarea').val('');
+		    });
 		    //喜欢/不喜欢文章
-		    $('#likeOrUnlike').on('click',function(){
+		    $('.article').on('click','#likeOrUnlike',function(){
 		    	//校验是否登录
 		    	if(!CookieParser.getCookie('name')){
 		    		location.href = 'login.html?article_id='+ article_id;
@@ -93,14 +114,55 @@ $(function() {
 		    		url:"../php/likeArticle.php",
 		    		async:true,
 		    		data: commitData,
-		    		success: function(){
+		    		success: function(result){
 		    			
+		    		}
+		    	});
+		    });
+		    
+		    //按时间倒序
+		    $('.article').on('click','.orderByTimeDesc' ,function(){
+		    	$.ajax({
+		    		url: '../php/detail.php',
+		    		data: {id: article_id, timeOrder: 1},
+		    		type: 'get',
+		    		success: function(result){
+		    			var likesofarticle = CookieParser.getCookie('likesofarticle') ? decodeURIComponent(CookieParser.getCookie('likesofarticle')).split(',') : [];
+			    		for(var i =0; i<likesofarticle.length; i++){
+			    			if(likesofarticle[i] == article_id){ //说明当前用户已经喜欢了此文章
+			    				result[0].hasLike = true;
+			    				break;
+			    			}
+			    		}
+		    			var commentHtml = template('atricleCommentTpl', {data:result});
+		    			$('.article_footer').remove();
+		    			$('.article').append(commentHtml);
+		    		}
+		    	});
+		    });
+		    
+		    //按时间正序
+		    $('.article').on('click','.orderByTimeAsc' ,function(){
+		    	$.ajax({
+		    		url: '../php/detail.php',
+		    		data: {id: article_id, timeOrder: 0},
+		    		type: 'get',
+		    		success: function(result){
+		    			var likesofarticle = CookieParser.getCookie('likesofarticle') ? decodeURIComponent(CookieParser.getCookie('likesofarticle')).split(',') : [];
+			    		for(var i =0; i<likesofarticle.length; i++){
+			    			if(likesofarticle[i] == article_id){ //说明当前用户已经喜欢了此文章
+			    				result[0].hasLike = true;
+			    				break;
+			    			}
+			    		}
+		    			var commentHtml = template('atricleCommentTpl', {data:result});
+		    			$('.article_footer').remove();
+		    			$('.article').append(commentHtml);
 		    		}
 		    	});
 		    });
     	}
     });
-    
     
     function loadingShow(){
     	$('html').css({

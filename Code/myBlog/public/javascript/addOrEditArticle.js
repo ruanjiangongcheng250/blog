@@ -31,7 +31,7 @@ if(!CookieParser.getCookie('name')){
 	location.href = 'login.html';
 }
 var article_id = location.search.substr(11);
-$('#author').val(CookieParser.getCookie('name'));
+$('#author').val(decodeURIComponent(CookieParser.getCookie('name')));
 //选择标签
 $('.article_label button').on('click', function(index,item){
 	$(this).siblings().removeClass('btn-danger');

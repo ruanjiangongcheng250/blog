@@ -160,7 +160,7 @@ $(function() {
 	function editOrDeleteArticle (result){
 		if(CookieParser.getCookie('name')){  //判断登录用户是否可编辑 删除文章
 			result.forEach(function(item,index){
-				if(item.author == CookieParser.getCookie('name')){
+				if(item.author == decodeURIComponent(CookieParser.getCookie('name'))){
 				    $('[data-articleid='+item.id+'] .article_content_head button').removeClass('hide');
 				    //删除文章
 				    $('.modal .confirmDeleteBtn').on('click', function(){
@@ -186,7 +186,7 @@ $(function() {
 				}
 			});
 			$('#myModal').on('show.bs.modal', function(event){
-				var button = $(event.relatedTarget);
+				var button = $(event.relatedTarget); //Button that triggered the modal
   				var article_id = button.data('articleid');
 		    	$(this).find('.confirmDeleteBtn').data('articleid',article_id);
 		    });

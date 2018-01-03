@@ -147,6 +147,7 @@ section .article_content img {
 }
 .commentContent {
 	clear: both;
+    padding: 0px 20px 20px;
 }
 /**footer**/
 footer {
@@ -198,3 +199,8 @@ footer {
 #hasLogin {
 	display: none;
 }
+
+#createArticle {
+	float: right;
+}
+
