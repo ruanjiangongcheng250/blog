@@ -127,5 +127,8 @@ $('#registerContainer #registeSubmit').on('click', function(){
 		}
 	});
 });
-//注册验证表单
+//点击暂不登录
+$('#notLogin').on('click', function(){
+	history.back();
+});
 

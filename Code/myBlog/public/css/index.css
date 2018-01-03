@@ -282,3 +282,7 @@ footer {
 .article_content_head button {
 	float: right;
 }
+
+#createArticle {
+	float: right;
+}

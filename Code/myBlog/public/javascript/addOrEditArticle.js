@@ -26,6 +26,10 @@ CookieParser = {
         }
     }
 };
+//未登录用户需要登录
+if(!CookieParser.getCookie('name')){
+	location.href = 'login.html';
+}
 var article_id = location.search.substr(11);
 $('#author').val(CookieParser.getCookie('name'));
 //选择标签

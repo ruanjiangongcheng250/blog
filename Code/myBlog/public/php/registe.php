@@ -16,7 +16,7 @@
 					echo json_encode(array("code"=>200, "message"=>"邮箱已存在"));
 				}else{
 					mysql_query("INSERT INTO `user`(`name`, `mobile`, `password`, `mail`) VALUES ('$name','$mobile','$password','$mail')");
-					setcookie('name', $name);
+					setcookie('name', $name, time()+3600, '/');
 					echo json_encode(array("code"=>200, "url"=>"index.html"));
 				    exit;
 				}
