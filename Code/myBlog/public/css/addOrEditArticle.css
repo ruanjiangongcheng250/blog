@@ -1,6 +1,7 @@
 body {
     background: url(../image/5629514927375932817.jpg) fixed 0 0;
     background-size: cover;
+    margin-bottom: 50px;
 }
 .addOrEditArticle {
 	width: 80%;
