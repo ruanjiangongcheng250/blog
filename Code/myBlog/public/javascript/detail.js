@@ -234,6 +234,7 @@ $(function() {
 		$('#noLogin').hide();
 		$('#hasLogin').show();
 		$('#userName').text(decodeURIComponent(name));
+		$('#userName').parent().attr('href', 'user.html?user_id='+CookieParser.getCookie('author_id'));
 	}
 	
 	//退出登录
