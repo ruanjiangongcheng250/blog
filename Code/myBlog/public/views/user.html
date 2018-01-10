@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="UTF-8">
+		<meta name="keywords" Content="zackon | 张涛">
+		<meta name="description" Content="zackon | 张涛">
+		<title>zackon | 张涛</title>
+		<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="../css/user.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div class="userContainer">
+		    <div class="userLeft">
+		    	<div class="userLeftTop">
+
+		    	</div>
+		    	<div class="userLeftBottom">
+		    	    <ul class="trigger-menu">
+		    	    	<li class="active current"><i class="icon iconfont">&#xe6a4;</i>&nbsp;&nbsp;<a>文章</a></li>
+		    	    	<li class=""><i class="icon iconfont">&#xe648;</i>&nbsp;&nbsp;<a>动态</a></li>
+		    	    	<li class=""><i class="icon iconfont">&#xe63d;</i>&nbsp;&nbsp;<a>评论</a></li>
+		    	    </ul>
+		    	    <div class="article">
+		    	    
+		    	    </div>
+		    	    <div class="hide interactive">
+		    	       	<p style="color: white; padding: 10px 20px;">暂无动态...</p>
+		    	    </div>
+		    	    <div class="hide comment">
+		    	        <p style="color: white; padding: 10px 20px;">暂无评论...</p>
+		    	    </div>
+		    	</div>
+		    </div>
+		    <div class="userRiht">
+		    	<div class='useDdescription'>
+		    		<p> <span>个人介绍</span><span class="editPersonDescription" style="float: right;"><i class="icon iconfont">&#xe74a;</i>&nbsp;编辑</span></p>
+		    		<div class="descriptionContent">
+		    			lallalalaa
+		    		</div>
+		    		<div class="editDescriptionContent hide">
+		    			<textarea></textarea>
+		    			<div style="height: 34px;">
+		    				<a class="btn btn-danger btn-sm btn-save">保存</a>
+		    				<a class="btn btn-default btn-sm btn-cancle">取消</a>
+		    			</div>
+		    		</div>
+		    		<hr>
+		    	</div>
+		    	<div class='likeArticle'>
+		    		<span><i class="icon iconfont">&#xe66f;</i>&nbsp;我喜欢的文章</span>
+		    		<hr />
+		    	</div>
+		    	<div class='privateNote'>
+		    		<p style="color: #969696;">我的文集</p>
+		    		<span><i class="icon iconfont">&#xe624;</i>&nbsp;日记本</span>
+		    		<hr />
+		    	</div>
+		    </div>
+		    <!-- 模态框 -->
+			  <div class="modal fade" id="myModal">
+			   <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <div class="modal-title">
+                           <button type="button" class="close" data-dismiss="modal">
+                               <span>&times</span>
+                           </button>
+                           <h4>删除后不可恢复，确认删除？</h4>
+                       </div>
+                   </div>
+                   <div class="modal-body text-right">
+                       <button class="btn btn-primary btn-sm" data-dismiss="modal">取消</button>
+                       <button class="btn btn-danger btn-sm confirmDeleteBtn"  data-dismiss="modal">确定</button>
+                   </div>
+	               </div>
+	           </div>
+			  </div>
+		    <script id="articleTpl" type="text/html">
+            	{{if data[0]}}
+	        		{{each data}} 
+		           	  <article class="article_content" data-articleid = {{$value.id}}>
+		           	  	<div class="article_content_head">
+		           	  		<p>
+		           	  			<a><img src="{{$value.avator}}"/></a>
+		           	  			<span class="article_author"><a>{{$value.author}}</a></span>
+		           	  			<span class="article_time">{{$value.time}}</span>
+		           	  			<button type="button" class="btn btn-danger hide deleteArticle" style="margin-left: 5px;" data-articleid = {{$value.id}} data-toggle="modal" data-target="#myModal">删除</button>
+		           	  			<button type="button" class="btn btn-primary hide editArticle"  data-articleid = {{$value.id}}>编辑</button>
+		           	  		</p>
+		           	  	    <p class="article_title" ><a href="detail.html?id={{$value.id}}">{{$value.name}}</a></p>
+		           	  	</div>
+		           	  	<div class="article_abstract">
+		                    {{$value.description}}...
+		           	    </div>
+		           	    <div class="article_contnet_footer">
+		           	    	<p><a><i class="icon iconfont">&#xe602;</i>{{$value.watch}}</a><a><i class="icon iconfont">&#xe623;</i>{{$value.comment.length}}</a><a><i class="icon iconfont">&#xe600;</i>{{$value.likes.length}}<a></p>
+		           	    </div>
+		           	  </article>
+		           	{{/each}}
+	           	{{else}}
+	           	     <p style="color: white; padding: 10px 20px;">暂无文章...</p>
+	           	{{/if}}
+           </script> 
+           <script id="userLeftTopTpl" type="text/html">
+       			<div class="avator">
+	    	    	<a>
+	    	    	   <img src="{{data.avator}}" />
+	    	    	</a>
+	    	    </div>
+	    	    <div class="nameAndInfo">
+	    	    	<div class="name">
+	    	    		<span>
+	    	    			{{data.name}}
+	    	    			<!--
+                            	作者：zhangtaos@yonyou.com
+                            	时间：2018-01-10
+                            	描述：sex为1 为男  0 为女
+                            -->
+	    	    			{{if data.sex==1}}
+	    	    		    	<i class="icon iconfont" style="color: white;">&#xe605</i>
+	    	    		    {{else}}
+	    	    		    	<i class="icon iconfont" style="color: white;">&#xe607</i>
+	    	    		    {{/if}}
+	    	    		</span>
+	    	    	</div>
+	    	    	<div class="info">
+	    	    		<ul>
+	    	    			<li style="padding-left: 0px;">
+	    	    				<span>{{data.likes}}</span>
+	    	    				<a>关注></a>
+	    	    			</li>
+	    	    			<li>
+	    	    				<span>{{data.fans}}</span>
+	    	    				<a>粉丝></a>
+	    	    			</li>
+	    	    			<li >
+	    	    				<span >{{data.articles.length}}</span>
+	    	    				<a>文章></a>
+	    	    			</li>
+	    	    			<li style="border-right:0 red solid;">
+	    	    				<span >{{data.wordNumber}}</span>
+	    	    				<a>字数</a>
+	    	    			</li>
+	    	    		</ul>
+	    	    	</div>
+	    	    </div>
+           </script>
+		</div>
+		<footer>
+	        	<hr>
+	        	<div id="goTop">
+	        		<img src="../image/gotop.gif"/>
+	        	</div>
+	        	<p>版权所有 © ICP备17022551号   技术支持：zackon科技</p>
+	        </footer>
+		<script src="../js/jquery.min.js"></script>		
+		<script src="../js/jquery.alerts.js"></script>
+		<script src="../javascript/user.js"></script>
+		<script src="../js/template.js"></script>
+		<script src="../js/jQuery.lazy.js"></script>
+        <script src="../js/backtop.js"></script>
+        <script src="../js/bootstrap.js"></script>
+	</body>
+</html>
