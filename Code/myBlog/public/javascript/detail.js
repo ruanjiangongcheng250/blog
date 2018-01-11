@@ -234,9 +234,44 @@ $(function() {
 		$('#noLogin').hide();
 		$('#hasLogin').show();
 		$('#userName').text(decodeURIComponent(name));
+		$('#userName').parent().on('mouseover', function(){
+			$('.trigger-content').removeClass('hide');
+		});
+		$('#userName').parent().on('mouseout', function(){
+			$('.trigger-content').addClass('hide');
+		});
+		$('.trigger-content').on('mouseover',function(){
+			$(this).removeClass('hide');
+		});
+		$('.trigger-content').on('mouseout',function(){
+			$(this).addClass('hide');
+		});
 		$('#userName').parent().attr('href', 'user.html?user_id='+CookieParser.getCookie('author_id'));
 	}
 	
+	$('.trigger-content li').on('click', function(){
+		if($(this).hasClass('myHome')){
+			location.href = 'user.html?user_id='+CookieParser.getCookie('author_id');
+		}else if($(this).hasClass('favouriteArticle')){
+			
+		}else if($(this).hasClass('helpAndCallback')){
+			
+		}else if($(this).hasClass('setting')){
+			
+		}else if($(this).hasClass('loginOut')){
+			$('.trigger-content').addClass('hide');
+			$('#noLogin').show();
+			$('#hasLogin').hide();
+			$.ajax({
+				type:"post",
+				url:"../php/loginOut.php",
+				async:true,
+				success: function(){
+					
+				}
+			});
+		}
+	});
 	//退出登录
 	$('#loginOut').on('click', function(){
 		$('#noLogin').show();

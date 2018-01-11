@@ -51,6 +51,11 @@ $.ajax({
 	async:true,
 	data: {userId: user_id},
 	success: function(result){
+		if(result.articles){
+			result.articles.forEach(function(item, index){
+				item.description = item.description.substr(0,100);
+			})
+		}
 		var articleTplHtml = template('articleTpl', {data: result.articles});
 		var userLeftTopTplHtml = template('userLeftTopTpl', {data: result});
 		$('.article').html(articleTplHtml);
@@ -125,4 +130,40 @@ function editOrDeleteArticle (result){
 		$('.editDescriptionContent').addClass('hide');
 		$('.editDescriptionContent textarea').val('');
 	});
+	
+	//喜欢的文章
+	$('body').on('click', '.likeArticle', function(){
+		var articleArr= decodeURIComponent(CookieParser.getCookie('likesofarticle'));
+		$.ajax({
+			type:"get",
+			url:"../php/getFavouriteArticles.php",
+			async:true,
+			data: {articleArr: articleArr},
+			success: function(result){
+				var articleTplHtml = template('articleTpl', {data: result});
+				$('.favouriteArticle').html(articleTplHtml);
+			}
+		});
+		$('.articleSection').addClass('hide');
+		$('.userSection').addClass('hide');
+		$('.likeSection').removeClass('hide');
+	});
+	
+	$('body').on('click','.nameAndInfo li', function(e){
+		if($(this).hasClass('li_fans') || $(this).hasClass('li_likes')){
+			$('.userSection').removeClass('hide');
+			$('.userSection').siblings().addClass('hide');
+			if($(this).hasClass('li_fans')){
+				$('.trigger-menu:visible li').eq(1).trigger('click');
+			}else{
+				$('.trigger-menu:visible li').eq(0).trigger('click');
+			}
+		}else if($(this).hasClass('li_article')){
+			$('.articleSection').removeClass('hide');
+			$('.articleSection').siblings().addClass('hide');
+			$('.trigger-menu:visible li').eq(0).trigger('click');
+		}else{
+			
+		}
+	})
 });
