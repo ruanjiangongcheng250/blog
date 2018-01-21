@@ -32,7 +32,7 @@ $('#loginContainer #loginSubmit').on('click', function(){
 	var commitData = {};
 	commitData.name = $("#loginContainer #name").val();
 	commitData.password = $("#loginContainer #password").val();
-	commitData.article_id =$('input[name=article_id]').val();
+	commitData.article_id = $('input[name=article_id]').val() ? $('input[name=article_id]').val() : '';
 	//验证非空
 	if(!commitData.name){
 		jAlert('请输入用户名');
@@ -61,9 +61,7 @@ $('#loginContainer #loginSubmit').on('click', function(){
 				jAlert('用户名或密码错误','提示');
 				return;
 			}
-			//location.href = result.url;
-			console.log(result.url)
-			location.href = 'views/index.html'
+			location.href = '../views/index.html';
 		}
 	});
 });
