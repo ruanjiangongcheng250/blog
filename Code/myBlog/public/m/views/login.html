@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta name="baidu-site-verification" content="QUmU9uX87w" />
+		<meta charset="UTF-8">
+		<meta name="keywords" Content="zackon | 张涛">
+		<meta name="description" Content="zackon | 张涛">
+		<title>zackon | 张涛</title>
+		<link href="../css/index.css" rel="stylesheet" type="text/css">
+		<link href="../css/login.css" rel="stylesheet" type="text/css">
+		<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="../css/jquery.alerts.css" rel="stylesheet" type="text/css">
+		<link href="../css/jquery.idcode.css" rel="stylesheet" type="text/css">
+		<link rel="shortcut icon" href="http://imgsize.ph.126.net/?imgurl=http://img0.ph.126.net/EMPZF5jMqMrM8Yj0OXaCeQ==/6632148585629997321.jpg_16x16x0x90.jpg">
+	</head>
+	<body style="width: 100%;">
+		<div id="login">
+			<h4 class="title login active">登陆</h4>
+			<h4 class="title registe">注册</h4>
+			<div id="loginContainer">
+				<form role="form" class="form-horizontal" id="loginForm">
+					<div class="form-group">
+						<label for="name" class=" col-sm-3  control-label" >用户名：</label>
+						<div class="col-sm-8">
+							<input type="text" name="name" id="name" class="form-control" placeholder="用户名/手机号/邮箱">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-sm-3  control-label" >密码：</label>
+						<div class="col-sm-8">
+							<input type="password" name="password" id="password" class="form-control" >
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="validateCode" class="col-sm-3  control-label" >验证码：</label>
+						<div class="col-sm-4">
+							<input type="validateCode" name="validateCode" id="validateCode" class="form-control" >
+						</div>
+						<div class="col-sm-5" style="height: 34px;line-height: 34px;padding-left: 0px;">
+							<span id="idcode"></span>
+						</div>
+					</div>
+					<input type="hidden" name="article_id">
+					<div class="form-group">
+						<div class="col-sm-12">
+							<button type="button" id="loginSubmit" class="btn btn-default">登录</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div id="registerContainer" class="hide">
+				<form id="loginForm" role="form" class="form-horizontal">
+					<div class="form-group">
+						<label for="name" class=" col-sm-3  control-label" >用户名：</label>
+						<div class="col-sm-8">
+							<input type="text" name="name" id="name" class="form-control" placeholder="用户名">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="name" class="col-sm-3  control-label" >密码：</label>
+						<div class="col-sm-8">
+							<input type="password" name="password" id="password" class="form-control" >
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="name" class="col-sm-3  control-label" >确认密码：</label>
+						<div class="col-sm-8">
+							<input type="password" name="Confirmpassword" id="Confirmpassword" class="form-control" >
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="mobile" class=" col-sm-3  control-label" >手机号：</label>
+						<div class="col-sm-8">
+							<input type="number" name="mobile" id="mobile" class="form-control" placeholder="手机号">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="mail" class=" col-sm-3  control-label" >邮箱：</label>
+						<div class="col-sm-8">
+							<input type="text" name="mail" id="mail" class="form-control" placeholder="邮箱">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12">
+							<button type="button" id="registeSubmit" class="btn btn-default">注册</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>	
+		<script src="../js/jquery.min.js"></script>		
+		<script src="../js/jquery.alerts.js"></script>
+		<script src="../js/jquery.idcode.js"></script>
+		<script src="../js/login.js"></script>
+	</body>
+</html>
