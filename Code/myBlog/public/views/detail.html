@@ -14,8 +14,18 @@
 	<body>
         <header>
         	<p class="loginAndRegiste">
-        		<span id="noLogin"><a href="login.html"><span id="login">登录</span></a>&nbsp;&nbsp;&nbsp;<a href="login.html?type=registe"><span id="registe">注册</span></a></span>
-        		<span id="hasLogin"><a href="javascript:void(0)"><span id="userName" >name</span></a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"><span id="loginOut">退出登录</span></a>&nbsp;&nbsp;&nbsp;<a href="index.html"><span>首页</span></a></span>
+        		<span id="noLogin"><a href="login.html" class="btn btn-danger"><span id="login">登录</span></a>&nbsp;&nbsp;&nbsp;<a href="login.html?type=registe" class="btn btn-danger"><span id="registe">注册</span></a></span>
+        		<span id="hasLogin"><a href="javascript:void(0)" class="btn btn-info"><span id="userName" >name</span><i style="margin-left: 10px; color: black;" class="icon iconfont">&#xe601;</i></a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="btn btn-danger"><span id="loginOut">退出登录</span></a>&nbsp;&nbsp;&nbsp;<a href="index.html" class="btn btn-info"><span>首页</span></a></span>
+        		<span id="createArticle"><a href="addOrEditArticle.html" class="btn btn-danger">写文章</a></span>
+        		<div class="hide trigger-content">
+        			<ul class="trigger-menu">
+        				<li class="myHome"><i class="icon iconfont">&#xe60d;</i>&nbsp;我的主页</li>
+        				<li class="favouriteArticle"><i class="icon iconfont">&#xe6ae;</i>&nbsp;喜欢的文章</li>
+        				<li class="helpAndCallback"><i class="icon iconfont">&#xe643;</i>&nbsp;帮助与反馈</li>
+        				<li class="setting"><i class="icon iconfont">&#xe63a;</i>&nbsp;设置</li>
+        				<li class="loginOut"><i class="icon iconfont">&#xe60f;</i>&nbsp;退出登录</li>
+        			</ul>
+        		</div>
         	</p>
         	<hr>
         	<a href="index.html"><img src="../image/avatar.jpg"></img></a>
@@ -30,10 +40,12 @@
            	  
            </div>
            <script type="text/html" id="articleDetailTpl">
-           	<article class="article_content">
-               {{#data[0].content}}
-           	</article>
-           	   <div class="article_footer">
+           	 <article class="article_content">
+                {{#data}}
+           	 </article>
+           	</script>
+            <script type="text/html" id="atricleCommentTpl">
+           		<div class="article_footer">
                 	<div class="article_likes">
                 		{{if data[0].hasLike}}
                 		    <img id="likeOrUnlike" src="../icon/like.png" /> <span style="display: none;">&nbsp;&nbsp;&nbsp; zackon等<span id="numberOfLikes">{{data[0].likes.length}}</span>人也觉得文章很赞！</span>
@@ -49,7 +61,7 @@
                 	</ul>
 	                <div class="inputComments">
 	                	<textarea  placeholder="请输入你的评论" rows="5" ></textarea>
-	                	<p><a class="btn btn-default">取消</a><a class="btn btn-info btn-comment">发送</a></p>
+	                	<p><a class="btn btn-default btn-reset">清空</a><a class="btn btn-info btn-comment">发送</a></p>
 	                </div>
 	                <div class="commentsList">
 	                	<p><span class="count">{{data[0].comment.length}}条评论</span><span class="orderBy"><a class="orderByTimeAsc">按时间正序</a><a class="orderByTimeDesc">按时间倒序</a></span></p>
@@ -83,7 +95,7 @@
         <script src="../js/jQuery.lazy.js"></script>
         <script src="../js/backtop.js"></script>
         <script src="../js/template.js"></script>
-        <script src="../js/detail.js"></script>
+        <script src="../javascript/detail.js"></script>
         <script src="../js/jquery.alerts.js"></script>
 	</body>
 </html>

@@ -14,8 +14,18 @@
 		<img style="position: absolute; top: 50%; left: 45%;" src="../image/loading.gif" id="loading">
         <header>
         	<p class="loginAndRegiste">
-        		<span id="noLogin"><a href="login.html"><span id="login">登录</span></a>&nbsp;&nbsp;&nbsp;<a href="login.html?type=registe"><span id="registe">注册</span></a></span>
-        		<span id="hasLogin"><a href="javascript:void(0)"><span id="userName" >name</span></a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"><span id="loginOut">退出登录</span></a></span>
+        		<span id="noLogin"><a href="login.html" class="btn btn-danger"><span id="login">登录</span></a>&nbsp;&nbsp;&nbsp;<a href="login.html?type=registe" class="btn btn-danger"><span id="registe">注册</span></a></span>
+        		<span id="hasLogin"><a class="btn btn-info"><span id="userName" >name</span><i style="margin-left: 10px; color: black;" class="icon iconfont">&#xe601;</i></a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="btn btn-danger"><span id="loginOut">退出登录</span></a></span>
+        		<span id="createArticle"><a href="addOrEditArticle.html" class="btn btn-danger">写文章</a></span>
+        		<div class="hide trigger-content">
+        			<ul class="trigger-menu">
+        				<li class="myHome"><i class="icon iconfont">&#xe60d;</i>&nbsp;我的主页</li>
+        				<li class="favouriteArticle"><i class="icon iconfont">&#xe6ae;</i>&nbsp;喜欢的文章</li>
+        				<li class="helpAndCallback"><i class="icon iconfont">&#xe643;</i>&nbsp;帮助与反馈</li>
+        				<li class="setting"><i class="icon iconfont">&#xe63a;</i>&nbsp;设置</li>
+        				<li class="loginOut"><i class="icon iconfont">&#xe60f;</i>&nbsp;退出登录</li>
+        			</ul>
+        		</div>
         	</p>
         	<hr>
         	<a href="index.html"><img src="../image/avatar.jpg"></img></a>
@@ -24,7 +34,7 @@
         	<div class="desc">
         		软件工程专业毕业，喜欢编程，运动，以及冒险，大学做过一些门户类网站。现投身互联网行业，目前工作于yonyou。喜欢互联网，喜欢健身，喜欢跑步，喜欢交朋友，喜欢笑起来像旺仔一样可爱的女生，喜欢认识更多有意思的人，欢迎和这个有全身充满正能量（捂脸）的处女座男生做朋友。
         	</div>
-        	<ul>
+        	<ul class="trigger-tab">
         		<li><a class="active" data-name=''>文章</a></li>
         		<li><a data-name='picture'>相册</a></li>
         		<li><a data-name='healthCare'>养生</a></li>
@@ -68,21 +78,50 @@
            </div>
            <div class="note hide">
            </div>
+	       <!-- 模态框 -->
+			  <div class="modal fade" id="myModal">
+			   <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <div class="modal-title">
+                           <button type="button" class="close" data-dismiss="modal">
+                               <span>&times</span>
+                           </button>
+                           <h4>删除后不可恢复，确认删除？</h4>
+                       </div>
+                   </div>
+                   <div class="modal-body text-right">
+                       <button class="btn btn-primary btn-sm" data-dismiss="modal">取消</button>
+                       <button class="btn btn-danger btn-sm confirmDeleteBtn"  data-dismiss="modal">确定</button>
+                   </div>
+	               </div>
+	           </div>
+			  </div>
             <script id="articleTpl" type="text/html">
-        		{{each data}} 
-	           	  <article class="article_content">
-	           	  	<div class="article_content_head">
-	           	  		<p><a><img src="../image/avatar.jpg"/></a><span class="article_author"><a>zackon</a></span><span class="article_time">{{$value.time}}</span></p>
-	           	  	    <p class="article_title" ><a href="detail.html?id={{$value.id}}">{{$value.name}}</a></p>
-	           	  	</div>
-	           	  	<div class="article_abstract">
-	                    {{$value.description}}...
-	           	    </div>
-	           	    <div class="article_contnet_footer">
-	           	    	<p><span ><a class="article_tag" data-tag="{{$value.type}}">{{$value.type}}</a></span><a><i class="icon iconfont">&#xe602;</i>{{$value.watch}}</a><a><i class="icon iconfont">&#xe623;</i>{{$value.comment}}</a><a><i class="icon iconfont">&#xe600;</i>{{$value.support}}<a></p>
-	           	    </div>
-	           	  </article>
-	           	{{/each}}
+            	{{if data[0]}}
+	        		{{each data}} 
+		           	  <article class="article_content" data-articleid = {{$value.id}}>
+		           	  	<div class="article_content_head">
+		           	  		<p>
+		           	  			<a><img src="{{$value.avator}}"/></a>
+		           	  			<span class="article_author"><a>{{$value.author}}</a></span>
+		           	  			<span class="article_time">{{$value.time}}</span>
+		           	  			<button type="button" class="btn btn-danger hide deleteArticle" style="margin-left: 5px;" data-articleid = {{$value.id}} data-toggle="modal" data-target="#myModal">删除</button>
+		           	  			<button type="button" class="btn btn-primary hide editArticle"  data-articleid = {{$value.id}}>编辑</button>
+		           	  		</p>
+		           	  	    <p class="article_title" ><a href="detail.html?id={{$value.id}}">{{$value.name}}</a></p>
+		           	  	</div>
+		           	  	<div class="article_abstract">
+		                    {{$value.description}}...
+		           	    </div>
+		           	    <div class="article_contnet_footer">
+		           	    	<p><span ><a class="article_tag" data-tag="{{$value.type}}">{{$value.type}}</a></span><a><i class="icon iconfont">&#xe602;</i>{{$value.watch}}</a><a><i class="icon iconfont">&#xe623;</i>{{$value.comment}}</a><a><i class="icon iconfont">&#xe600;</i>{{$value.support}}<a></p>
+		           	    </div>
+		           	  </article>
+		           	{{/each}}
+	           	{{else}}
+	           	     <p style="color: white;">暂无文章...</p>
+	           	{{/if}}
            </script> 
         </section>
         <footer>
@@ -97,6 +136,7 @@
         <script src="../js/backtop.js"></script>
         <script src="../js/template.js"></script>
         <script src="../js/jquery.alerts.js"></script>
-        <script src="../js/index.js"></script>
+        <script src="../javascript/index.js"></script>
+        <script src="../js/bootstrap.js"></script>
 	</body>
 </html>

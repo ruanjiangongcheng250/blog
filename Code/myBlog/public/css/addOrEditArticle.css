@@ -1,0 +1,37 @@
+body {
+    background: url(../image/5629514927375932817.jpg) fixed 0 0;
+    background-size: cover;
+    margin-bottom: 50px;
+}
+.addOrEditArticle {
+	width: 80%;
+	text-align: center;
+	margin: 0 auto;
+}
+
+#editor {
+	margin: 0 auto;
+	margin-top: 120px;
+}
+
+.addOrEditArticle #time, .addOrEditArticle #author {
+	margin-top: 10px;
+}
+
+.article_label {
+	text-align: left;
+}
+
+.article_label button{
+	margin-right: 15px;
+}
+.footer .btnGroup{
+	width: 76%;
+	margin: 10px auto;
+	text-align: right;
+}
+
+.footer .btn button{
+	margin-left: 10px;
+}
+
