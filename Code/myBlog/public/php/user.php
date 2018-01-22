@@ -1,6 +1,16 @@
 <?php
     include 'base.php';
     $result = mysql_query("SELECT * FROM user WHERE id = '".$_GET['userId']."'");
+    $likesResult = mysql_query("SELECT * FROM likes WHERE userId = '".$_GET['userId']."'");
+    $fansResult = mysql_query("SELECT * FROM fans WHERE userId = '".$_GET['userId']."'");
+    $fansArr = array();
+    $likesArr = array();
+    while($fansRow = mysql_fetch_array($fansResult)){
+    	array_push($fansArr, $fansRow['fansId']);
+    }
+    while($likesRow = mysql_fetch_array($likesResult)){
+    	array_push($likesArr, $likesRow['likesId']);
+    }
     while($row = mysql_fetch_object($result)){
     	$article = mysql_query("SELECT * FROM article WHERE author = '".$row->name."'");
     	$articleArr = array();
@@ -50,8 +60,8 @@
 	    	'name'=> $row->name,
 	    	'sex'=> $row->sex,
 	    	'description'=> $row->description,
-	    	'fans' => $row->fans,
-	    	'likes' => $row->likes,
+	    	'fans' => $fansArr,
+	    	'likes' => $likesArr,
 	    	'mail' => $row->mail,
 	    	'wordNumber'=> $wordNumber,
 	    	'articles' => $articleArr

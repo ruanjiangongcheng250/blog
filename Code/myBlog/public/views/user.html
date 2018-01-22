@@ -34,14 +34,18 @@
 		    	   </div>
 		    	   <div class="userSection hide">
 			    	    <ul class="trigger-menu">
-			    	    	<li class="active current"><i class="icon iconfont">&#xe6a4;</i>&nbsp;&nbsp;<a>关注用户</a></li>
-			    	    	<li class=""><i class="icon iconfont">&#xe648;</i>&nbsp;&nbsp;<a>粉丝</a></li>
+			    	    	<li class="active current"><i class="icon iconfont">&#xe666;</i>&nbsp;&nbsp;<a>关注用户</a></li>
+			    	    	<li class=""><i class="icon iconfont">&#xe61b;</i>&nbsp;&nbsp;<a>粉丝</a></li>
 			    	    </ul>
 			    	    <div class="likes">
-			    	    	<p style="color: white; padding: 10px 20px;">暂无关注用户...</p>
+			    	    	<div id="list-container">
+			    	    		
+			    	    	</div>
 			    	    </div>
 			    	    <div class="hide fans">
-			    	       	<p style="color: white; padding: 10px 20px;">暂无粉丝...</p>
+			    	       	<div id="list-container">
+			    	    		
+			    	    	</div>
 			    	    </div>
 		    	   </div>
 		    	   <div class="likeSection hide">
@@ -149,11 +153,11 @@
 	    	    	<div class="info">
 	    	    		<ul>
 	    	    			<li class="li_likes" style="padding-left: 0px;">
-	    	    				<span>{{data.likes}}</span>
+	    	    				<span>{{data.likes.length}}</span>
 	    	    				<a>关注></a>
 	    	    			</li>
 	    	    			<li class="li_fans">
-	    	    				<span>{{data.fans}}</span>
+	    	    				<span>{{data.fans.length}}</span>
 	    	    				<a>粉丝></a>
 	    	    			</li>
 	    	    			<li class="li_article">
@@ -167,6 +171,71 @@
 	    	    		</ul>
 	    	    	</div>
 	    	    </div>
+	    	    <div class="addLikes">
+	    	    	<button class="btn btn-default">加关注</button>
+	    	    </div>
+           </script>
+           <script id="likes" type="text/html">
+           	{{if data[0]}}
+	           	<ul>
+	           		{{each data}}
+		    			<li>
+		    				<a class="avator">
+		    					<img src="{{$value.avator}}" />
+		    				</a>
+		    				<div class="info">
+		    					<a class="name">{{$value.name}}</a>
+		    					<div class="meta">
+		    						<span>关注 {{$value.likes.length}}</span>
+		    						<span>粉丝 {{$value.fans.length}}</span>
+		    						<span style="border-right: 0px;">文章 {{$value.articles.length}}</span>
+		    					</div>
+		    					<div class="meta" style="clear: both;">
+							      	写了 {{$value.wordNumber}} 字，获得了 2947 个喜欢
+							    </div>
+		    				</div>
+		    				<a class="btn btn-default following">
+							    	<i class="iconfont ic-followed"></i><span>已关注</span>
+							</a>
+		    			</li>
+	    			{{/each}}
+	    		</ul>
+	    	{{else}}
+	    		<p style="color: white; padding: 10px 20px;">暂无关注用户...</p>
+	    	{{/if}}
+           </script>
+           <script id="fans" type="text/html">
+           	{{if data[0]}}
+	           	<ul>
+	           		{{each data}}
+		    			<li>
+		    				<a class="avator">
+		    					<img src="{{$value.avator}}" />
+		    				</a>
+		    				<div class="info">
+		    					<a class="name">{{$value.name}}</a>
+		    					<div class="meta">
+		    						<span>关注 {{$value.likes.length}}</span>
+		    						<span>粉丝 {{$value.fans.length}}</span>
+		    						<span style="border-right: 0px;">文章 {{$value.articles.length}}</span>
+		    					</div>
+		    					<div class="meta" style="clear: both;">
+							      	写了 {{$value.wordNumber}} 字，获得了 2947 个喜欢
+							    </div>
+		    				</div>
+		    				<a class="btn btn-default following">
+		    					{{if $value.hasLiked}}
+							    	<i class="iconfont ic-followed"></i><span>相互关注</span>
+							    {{else}}
+							    	<i class="iconfont ic-followed"></i><span>加关注</span>
+							    {{/if}}
+							</a>
+		    			</li>
+	    			{{/each}}
+	    		</ul>
+	    	{{else}}
+	    		<p style="color: white; padding: 10px 20px;">暂无粉丝...</p>
+	    	{{/if}}
            </script>
 		</div>
 		<footer>

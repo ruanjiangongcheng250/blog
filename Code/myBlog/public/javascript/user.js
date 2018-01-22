@@ -51,6 +51,7 @@ $.ajax({
 	async:true,
 	data: {userId: user_id},
 	success: function(result){
+		likesId = result.likes; //将关注的用户的id 设置为全局
 		if(result.articles){
 			result.articles.forEach(function(item, index){
 				item.description = item.description.substr(0,100);
@@ -62,6 +63,46 @@ $.ajax({
 		$('.userLeftTop').html(userLeftTopTplHtml);
 		editOrDeleteArticle(result.articles);
 		$('.descriptionContent').text(result.description || '一句话介绍你自己。。。');
+		//当前主页是否为当前登录用户的主页
+		if(user_id == CookieParser.getCookie('author_id')){
+			//去掉关注按钮
+			$('.addLikes').addClass('hide');
+		}else{
+			//不可编辑个人介绍
+			$('.editPersonDescription').addClass('hide');
+			//不可删除/编辑
+			$('.deleteArticle, .editArticle').addClass('hide');
+			$('.likeArticle span').text('他/她喜欢的文章');
+		}
+		//加关注
+		$('.addLikes button').on('click', function(){
+			var type = true;
+			$(this).css({width: '100px'}).text('已经关注').addClass('hasAddLikes');
+			$('.addLikes').on('mouseover', '.hasAddLikes', function(){
+				$(this).text('X取消关注').css({backgroundColor: '#969696'}).addClass('CancleAddLikes');
+			});
+			$('.addLikes').on('mouseout', '.hasAddLikes', function(){
+				$(this).text('已经关注').css({backgroundColor: '#e6e6e6'});
+			});
+			$('.addLikes').on('click', '.CancleAddLikes', function(){
+				type = false;
+				$(this).text('加关注').css({backgroundColor: '#42c02e',width: '80px'}).removeClass('CancleAddLikes').removeClass('hasAddLikes');
+			});
+			$.ajax({
+				'url': '../php/addLike.php',
+				'type': 'post',
+				'data': {
+					'userId': CookieParser.getCookie('author_id'), //当前登录用户Id
+					'addLikesId': user_id, //要关注的用户id
+					'addLikeType': type //关注类型  true 为关注  false 为取消关注
+				},
+				'success': function(result){
+					if(result.code == 200){
+						
+					}
+				}
+			});
+		});
 		
 	}
 });
@@ -153,6 +194,31 @@ function editOrDeleteArticle (result){
 		if($(this).hasClass('li_fans') || $(this).hasClass('li_likes')){
 			$('.userSection').removeClass('hide');
 			$('.userSection').siblings().addClass('hide');
+			$.ajax({
+					url: '../php/getFansOrLikes.php',
+					type: 'get',
+					data: {userId: user_id, type: 'fans'},
+					success: function(result){debugger
+						result.forEach(function(item, index){
+							for(var i = 0; i<likesId.length; i++){
+								if(item.id == likesId[i]){
+									item.hasLiked = true;
+								}
+							}
+						});
+						var html = template('fans', {data: result});
+						$('.fans div').html(html);
+					}
+			});
+			$.ajax({
+					url: '../php/getFansOrLikes.php',
+					type: 'get',
+					data: {userId: user_id, type: 'likes'},
+					success: function(result){
+						var html = template('likes', {data: result});
+						$('.likes div').html(html);
+					}
+			});
 			if($(this).hasClass('li_fans')){
 				$('.trigger-menu:visible li').eq(1).trigger('click');
 			}else{

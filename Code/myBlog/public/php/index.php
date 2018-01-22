@@ -17,9 +17,9 @@
                 while($row = mysql_fetch_array($result))
 				{
 					$user = mysql_query("SELECT * from user where name ='".$row['author']."'");
-					file_put_contents('d:log.txt', "SELECT * from user where name =".$row['author'],FILE_APPEND);
 					while($row_user = mysql_fetch_object($user)){
 						$avator = $row_user->avator;
+						$userId = $row_user->id;
 						array_push($arr,array('id'=> $row['id'], 
 											  'name'=> $row['name'], 
 											  'description'=> $row['description'], 
@@ -29,7 +29,8 @@
 											  'watch'=> $row['watch'],
 											  'comment'=> $row['comment'],
 											  'type'=> $row['type'],
-											  'avator'=> $avator
+											  'avator'=> $avator,
+											  'userId'=> $userId
 											  ));
 					}
 				}  
