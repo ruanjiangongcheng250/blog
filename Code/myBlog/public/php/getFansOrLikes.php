@@ -84,14 +84,14 @@
 					while($fanssRow = mysql_fetch_array($fansResult)){
 						$fansId = $fanssRow['fansId'];
 						$userResult = mysql_query("SELECT * from user where id ='".$fansId."'");
-						$likesResult1 = mysql_query("SELECT * FROM likes WHERE userId = '".$fansId."'");
-					    $fansResult = mysql_query("SELECT * FROM fans WHERE userId = '".$fansId."'");
+						$likesResult = mysql_query("SELECT * FROM likes WHERE userId = '".$fansId."'");
+					    $fansResult1 = mysql_query("SELECT * FROM fans WHERE userId = '".$fansId."'");
 					    $fansArr = array();
 					    $likesArr = array();
-					    while($fansRow = mysql_fetch_array($fansResult)){
+					    while($fansRow = mysql_fetch_array($fansResult1)){
 					    	array_push($fansArr, $fansRow['fansId']);
 					    }
-					    while($likesRow = mysql_fetch_array($likesResult1)){
+					    while($likesRow = mysql_fetch_array($likesResult)){
 					    	array_push($likesArr, $likesRow['likesId']);
 					    }
 						while($row = mysql_fetch_object($userResult)){

@@ -49,9 +49,19 @@ $.ajax({
 	type:"get",
 	url:"../php/user.php",
 	async:true,
+	data: {userId: CookieParser.getCookie('author_id')},
+	success: function(result){
+		currentUserlikesId = result.likes; //将关注的用户的id 设置为全局
+		currentUserfansId = result.fans;
+	}
+});
+
+$.ajax({
+	type:"get",
+	url:"../php/user.php",
+	async:true,
 	data: {userId: user_id},
 	success: function(result){
-		likesId = result.likes; //将关注的用户的id 设置为全局
 		fansId = result.fans;
 		if(result.articles){
 			result.articles.forEach(function(item, index){
@@ -78,17 +88,17 @@ $.ajax({
 		//加关注/取消关注
 		$('.addLikes button').on('click', function(){
 			var type;
-			if($(this).hasClass('hasAddLikes')){
+			if($(this).hasClass('hasLiked')){
 				type = false;
-				$(this).text('加关注').css({backgroundColor: '#42c02e',width: '80px'}).removeClass('CancleAddLikes').removeClass('hasAddLikes');
+				$(this).text('加关注').css({backgroundColor: '#42c02e',width: '80px'}).removeClass('CancleAddLikes').removeClass('hasLiked');
 				$('.li_fans span').text(parseInt($('.li_fans span').text()) - 1);
 			}else{
 				type = true;
-				$(this).css({width: '100px'}).text('已经关注').addClass('hasAddLikes');
-				$('.addLikes').on('mouseover', '.hasAddLikes', function(){
+				$(this).css({width: '100px'}).text('已经关注').addClass('hasLiked');
+				$('.addLikes').on('mouseover', '.hasLiked', function(){
 					$(this).text('X取消关注').css({backgroundColor: '#969696'}).addClass('CancleAddLikes');
 				});
-				$('.addLikes').on('mouseout', '.hasAddLikes', function(){
+				$('.addLikes').on('mouseout', '.hasLiked', function(){
 					$(this).text('已经关注').css({backgroundColor: '#e6e6e6'});
 				});
 				$('.li_fans span').text(parseInt($('.li_fans span').text()) + 1);
@@ -109,30 +119,30 @@ $.ajax({
 			});
 		});
 		if(fansId.indexOf(CookieParser.getCookie('author_id')) > -1){
-			$('.addLikes button').css({width: '100px'}).text('已经关注').addClass('hasAddLikes');
-			$('.addLikes').on('mouseover', '.hasAddLikes', function(){
+			$('.addLikes button').css({width: '100px'}).text('已关注').addClass('hasLiked');
+			$('.addLikes').on('mouseover', '.hasLiked', function(){
 				$(this).text('X取消关注').css({backgroundColor: '#969696'}).addClass('CancleAddLikes');
 			});
-			$('.addLikes').on('mouseout', '.hasAddLikes', function(){
-				$(this).text('已经关注').css({backgroundColor: '#e6e6e6'});
+			$('.addLikes').on('mouseout', '.hasLiked', function(){
+				$(this).text('已关注').css({backgroundColor: '#e6e6e6'});
 			});
 			$('.addLikes').on('click', '.CancleAddLikes', function(){
 				type = false;
-				$(this).text('加关注').css({backgroundColor: '#42c02e',width: '80px'}).removeClass('CancleAddLikes').removeClass('hasAddLikes');
+				$(this).text('加关注').css({backgroundColor: '#42c02e',width: '80px'}).removeClass('CancleAddLikes').removeClass('hasLiked');
 				$.ajax({
-				'url': '../php/addLike.php',
-				'type': 'post',
-				'data': {
-					'userId': CookieParser.getCookie('author_id'), //当前登录用户Id
-					'addLikesId': user_id, //要关注的用户id
-					'addLikeType': type //关注类型  true 为关注  false 为取消关注
-				},
-				'success': function(result){
-					if(result.code == 200){
-						
+					'url': '../php/addLike.php',
+					'type': 'post',
+					'data': {
+						'userId': CookieParser.getCookie('author_id'), //当前登录用户Id
+						'addLikesId': user_id, //要关注的用户id
+						'addLikeType': type //关注类型  true 为关注  false 为取消关注
+					},
+					'success': function(result){
+						if(result.code == 200){
+							
+						}
 					}
-				}
-			});
+				});
 			});
 		}
 	}
@@ -231,17 +241,18 @@ function editOrDeleteArticle (result){
 					data: {userId: user_id, type: 'fans'},
 					success: function(result){
 						result.forEach(function(item, index){
-							for(var i = 0; i<likesId.length; i++){
-								if(item.id == likesId[i]){
+							for(var i = 0; i<currentUserlikesId.length; i++){
+								if(item.id == currentUserlikesId[i]){
 									item.hasLiked = true;
 								}
 							}
 							if(item.id == CookieParser.getCookie('author_id')){
-								$('.addLikes button').addClass('hasAddlikes');
+								$('.addLikes button').addClass('hasLiked');
 							}
 						});
 						var html = template('fans', {data: result});
 						$('.fans div').html(html);
+						addLike();
 					}
 			});
 			$.ajax({
@@ -249,8 +260,17 @@ function editOrDeleteArticle (result){
 					type: 'get',
 					data: {userId: user_id, type: 'likes'},
 					success: function(result){
+						result.forEach(function(item, index){
+							for(var i=0; i< currentUserlikesId.length; i++){
+								if(item.id == currentUserlikesId[i]){
+									item.hasLiked = true;
+								}
+							}
+						});
 						var html = template('likes', {data: result});
 						$('.likes div').html(html);
+						addLike();
+						
 					}
 			});
 			if($(this).hasClass('li_fans')){
@@ -265,5 +285,43 @@ function editOrDeleteArticle (result){
 		}else{
 			
 		}
-	})
+	});
+	
+	function addLike(){
+		$('li').on('mouseover', '.hasLiked', function(){
+			$(this).text('X取消关注').css({backgroundColor: '#969696'});
+		})
+		$('li').on('mouseout', '.hasLiked', function(){
+			$(this).text('已关注').css({backgroundColor: '#e6e6e6'});
+		})
+		$('li .following').on('click', function(){
+			var user_id = $(this).parent().data('userid');
+			var type;
+			if($(this).hasClass('hasLiked')){
+				type = false;
+				$(this).removeClass('hasLiked');
+				$(this).text('加关注');
+				$(this).parent().find('.info .fensi').text(parseInt($(this).parent().find('.info .fensi').text())-1);
+			}else{
+				type = true;
+				$(this).addClass('hasLiked');
+				$(this).text('已关注');
+				$(this).parent().find('.info .fensi').text(parseInt($(this).parent().find('.info .fensi').text())+1);
+			}
+			$.ajax({
+				'url': '../php/addLike.php',
+				'type': 'post',
+				'data': {
+					'userId': CookieParser.getCookie('author_id'), //当前登录用户Id
+					'addLikesId': user_id, //要关注的用户id
+					'addLikeType': type //关注类型  true 为关注  false 为取消关注
+				},
+				'success': function(result){
+					if(result.code == 200){
+						
+					}
+				}
+			});
+		})
+	}
 });

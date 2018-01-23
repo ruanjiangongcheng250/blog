@@ -179,24 +179,30 @@
            	{{if data[0]}}
 	           	<ul>
 	           		{{each data}}
-		    			<li>
+		    			<li data-userid={{$value.id}}>
 		    				<a class="avator" href="user.html?user_id={{$value.id}}">
 		    					<img src="{{$value.avator}}" />
 		    				</a>
 		    				<div class="info">
 		    					<a class="name">{{$value.name}}</a>
 		    					<div class="meta">
-		    						<span>关注 {{$value.likes.length}}</span>
-		    						<span>粉丝 {{$value.fans.length}}</span>
+		    						<span>关注 <i class="guanzhu">{{$value.likes.length}}</i></span>
+		    						<span>粉丝 <i class="fensi">{{$value.fans.length}}</i></span>
 		    						<span style="border-right: 0px;">文章 {{$value.articles.length}}</span>
 		    					</div>
 		    					<div class="meta" style="clear: both;">
 							      	写了 {{$value.wordNumber}} 字，获得了 2947 个喜欢
 							    </div>
 		    				</div>
-		    				<a class="btn btn-default following">
-							    	<i class="iconfont ic-followed"></i><span>已关注</span>
-							</a>
+		    				{{if $value.hasLiked}}
+			    				<a class="btn btn-default following hasLiked">
+								    <i class="iconfont ic-followed"></i><span>已关注</span>
+								</a>
+							{{else}}
+								<a class="btn btn-default following">
+								    <i class="iconfont ic-followed"></i><span>加关注</span>
+								</a>
+							{{/if}}
 		    			</li>
 	    			{{/each}}
 	    		</ul>
@@ -208,28 +214,30 @@
            	{{if data[0]}}
 	           	<ul>
 	           		{{each data}}
-		    			<li>
+		    			<li  data-userid={{$value.id}}>
 		    				<a class="avator" href="user.html?user_id={{$value.id}}">
 		    					<img src="{{$value.avator}}" />
 		    				</a>
 		    				<div class="info">
 		    					<a class="name">{{$value.name}}</a>
 		    					<div class="meta">
-		    						<span>关注 {{$value.likes.length}}</span>
-		    						<span>粉丝 {{$value.fans.length}}</span>
+		    						<span>关注<i class="guanzhu">{{$value.likes.length}}</i></span>
+		    						<span>粉丝 <i class="fensi">{{$value.fans.length}}</i></span>
 		    						<span style="border-right: 0px;">文章 {{$value.articles.length}}</span>
 		    					</div>
 		    					<div class="meta" style="clear: both;">
 							      	写了 {{$value.wordNumber}} 字，获得了 2947 个喜欢
 							    </div>
 		    				</div>
-		    				<a class="btn btn-default following">
 		    					{{if $value.hasLiked}}
-							    	<i class="iconfont ic-followed"></i><span>相互关注</span>
+		    						<a class="btn btn-default following hasLiked">
+							    		<i class="iconfont ic-followed"></i><span>已关注</span>
+							    	</a>
 							    {{else}}
-							    	<i class="iconfont ic-followed"></i><span>加关注</span>
+							    	<a class="btn btn-default following">
+							    		<i class="iconfont ic-followed"></i><span>加关注</span>
+							    	</a>
 							    {{/if}}
-							</a>
 		    			</li>
 	    			{{/each}}
 	    		</ul>

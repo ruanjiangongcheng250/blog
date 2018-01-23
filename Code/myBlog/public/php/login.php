@@ -10,15 +10,15 @@
 					$author_id = $row->id;
 				}
 				if(mysql_num_rows($result)){
-					setcookie('name', $name,time()+3600,'/');
-					setcookie('avator', $author_avator,time()+3600,'/');
-					setcookie('author_id', $author_id,time()+3600,'/');
+					setcookie('name', $name,time()+36000,'/');
+					setcookie('avator', $author_avator,time()+36000,'/');
+					setcookie('author_id', $author_id,time()+36000,'/');
 					$resultOfLikes = mysql_query("SELECT * FROM `likesofarticle` WHERE author_id='$author_id'");
 					$arrLikes = array();
 					while($row = mysql_fetch_array($resultOfLikes)){
 					    array_push($arrLikes, $row['article_id']);
 					}
-					setcookie('likesofarticle', implode(',',$arrLikes),time()+3600,'/');
+					setcookie('likesofarticle', implode(',',$arrLikes),time()+36000,'/');
 					if(empty($article_id)){
 						echo json_encode(array("code"=>200,"url"=>"index.html"),JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 					}else{
