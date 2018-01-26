@@ -56,10 +56,12 @@
     		}
     	}
     	$arr = array(
+    		'id' => $row->id,
 	    	'avator' => $row->avator,
 	    	'name'=> $row->name,
 	    	'sex'=> $row->sex,
 	    	'description'=> $row->description,
+	    	'mobile'=> $row->mobile,
 	    	'fans' => $fansArr,
 	    	'likes' => $likesArr,
 	    	'mail' => $row->mail,

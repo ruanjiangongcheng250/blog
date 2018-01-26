@@ -257,7 +257,7 @@ $(function() {
 		}else if($(this).hasClass('helpAndCallback')){
 			
 		}else if($(this).hasClass('setting')){
-			
+			location.href = 'setting.html?user_id='+CookieParser.getCookie('author_id');
 		}else if($(this).hasClass('loginOut')){
 			$('.trigger-content').addClass('hide');
 			$('#noLogin').show();

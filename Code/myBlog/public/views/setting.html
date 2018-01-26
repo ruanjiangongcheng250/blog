@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="keywords" Content="zackon | 张涛">
+		<meta name="description" Content="zackon | 张涛">
+		<title>zackon | 张涛</title>
+		<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="../css/setting.css" rel="stylesheet" type="text/css">
+		<link href="../css/jquery.alerts.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<header style="border-bottom: 1px dashed white;">
+			<p class="loginAndRegiste">
+        		<span id="noLogin"><a href="login.html" class="btn btn-danger"><span id="login">登录</span></a>&nbsp;&nbsp;&nbsp;<a href="login.html?type=registe" class="btn btn-danger"><span id="registe">注册</span></a></span>
+        		<span id="hasLogin"><a href="javascript:void(0)" class="btn btn-info"><span id="userName" >name</span><i style="margin-left: 10px; color: black;" class="icon iconfont">&#xe601;</i></a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="btn btn-danger"><span id="loginOut">退出登录</span></a>&nbsp;&nbsp;&nbsp;<a href="index.html" class="btn btn-info"><span>首页</span></a></span>
+        		<span id="createArticle"><a href="addOrEditArticle.html" class="btn btn-danger">写文章</a></span>
+        		<div class="hide trigger-content" style="margin-top: -20px;">
+        			<ul class="trigger-menu">
+        				<li class="myHome"><i class="icon iconfont">&#xe60d;</i>&nbsp;我的主页</li>
+        				<li class="favouriteArticle"><i class="icon iconfont">&#xe6ae;</i>&nbsp;喜欢的文章</li>
+        				<li class="helpAndCallback"><i class="icon iconfont">&#xe643;</i>&nbsp;帮助与反馈</li>
+        				<li class="setting"><i class="icon iconfont">&#xe63a;</i>&nbsp;设置</li>
+        				<li class="loginOut"><i class="icon iconfont">&#xe60f;</i>&nbsp;退出登录</li>
+        			</ul>
+        		</div>
+        	</p>
+		</header>
+		<section>
+			<div class="settingLeft">
+				<ul class="setting_menu">
+					<li class="active basic">基础设置</li>
+					<li class="profile">个人资料</li>
+				</ul>
+			</div>
+			<div class="settingRight">
+				<div class="setting-basic">
+					
+				</div>
+				<div class="setting-profile hide">
+					setting-profile hide
+				</div>
+			</div>
+			<script type="text/html" id="settingBasic">
+				<div class="avator-content">
+					<div>
+						<img class="avatorImage" src="{{data.avator}}" /> <span id="changeAvator">更改头像</span>
+						<form  id= "upload_form" style="display: inline"  enctype="multipart/form-data">
+							<input type="file" name="file" data-userid={{data.id}} style="width: 76px; position: relative;left: -75px;opacity: 0; display: inline;"> 
+						</form>
+					</div>
+				</div>
+				<label for="nickName" class=" col-sm-2  control-label" >昵称：</label>
+				<div class="col-sm-10">
+					<input type="text" name="nickName" id="nickName" class="form-control" value="{{data.name}}">
+				</div>
+				<label for="email" class=" col-sm-2  control-label" >邮箱：</label>
+				<div class="col-sm-10">
+					<input type="text" name="email" id="email" class="form-control" value="{{data.mail}}">
+				</div>
+				<label for="mobile" class=" col-sm-2  control-label" >手机：</label>
+				<div class="col-sm-10">
+					<input type="text" name="mobile" id="mobile" class="form-control" value="{{data.mobile}}">
+				</div>
+				<button class="btn btn-default saveSettingBasic">保存</button>
+			</script>
+		</section>
+		<footer>
+        	<hr>
+        	<div id="goTop">
+        		<img src="../image/gotop.gif"/>
+        	</div>
+        	<p>版权所有 © ICP备17022551号   技术支持：zackon科技</p>
+        </footer>
+		<script src="../js/jquery.min.js"></script>		
+		<script src="../js/jquery.alerts.js"></script>
+		<script src="../javascript/setting.js"></script>
+		<script src="../js/template.js"></script>
+		<script src="../js/jQuery.lazy.js"></script>
+        <script src="../js/backtop.js"></script>
+        <script src="../js/bootstrap.js"></script>
+	</body>
+</html>

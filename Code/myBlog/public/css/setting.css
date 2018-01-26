@@ -66,241 +66,6 @@ body {
 a:hover{
 	text-decoration: none;
 }
-.userLeft {
-	float: left;
-	width: 70%;
-	margin-bottom: 30px;
-}
-
-.userRiht {
-	float: left;
-	width: 28%;
-	margin-left: 2%;
-	color: wheat;
-}
-
-.userLeftTop {
-	height: 100px;
-}
-
-.addLikes {
-	line-height: 100px;
-	float: right;
-	margin-right: 100px;
-}
-.addLikes button {
-	background-color: #42c02e;
-	border-radius: 40px;
-	color: white;
-	width: 80px;
-}
-.avator {
-    width: 90px;
-    float: left;	
-}
-.nameAndInfo {
-	float: left;
-	padding-left: 15px;
-	padding-top: 5px;
-}
-
-.nameAndInfo ul{
-	display: inline-flex;
-    list-style-type: none;
-    padding-left: 0px;
-    color: white;
-    margin: 10px 0 2px 0;
-}
-.nameAndInfo ul li{
-	padding:0 15px;
-	height: 40px;
-	border-right: 1px gainsboro solid;
-}
-
-.nameAndInfo ul li span {
-	margin-bottom: 5px;
-}
-.nameAndInfo .name{
-	color: wheat;
-	display: inline;
-    font-size: 21px;
-    font-weight: 700;
-    vertical-align: middle;
-}
-.avator img {
-	width: 80px;
-	height: 80px;
-	border-radius: 80px;
-}
-.info {
-	font-size: 12px;
-}
-.info li{
-	cursor: pointer;
-}
-.info span {
-	display: block;
-}
-.info a{
-	color: wheat;
-}
-.userContainer {
-	margin: 20px 0;
-}
-
-.userContainer .trigger-menu {
-	list-style-type: none;
-	display: inline-flex;
-	padding-left: 0;
-}
-
-.userContainer .trigger-menu li{
-	padding: 5px 40px;
-	cursor: pointer;
-}
-.userContainer .trigger-menu li a {
-	cursor: pointer;
-	color: wheat;
-}
-.userContainer .trigger-menu li.active {
-	border-bottom: 2px solid wheat;
-}
-.userContainer .trigger-menu i {
-	color: wheat;
-}
-.article_content {
-	padding: 5px 20px;
-}
-
-.article_title {
-	font-size: 18px;
-    font-weight: 700;
-}
-
-.article_content_head img {
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-}
-
-.article_content_head span {
-    padding-left: 15px;
-    font-size: 13px;
-}
-
-.userLeftBottom .article, .userLeftBottom .interactive, .userLeftBottom .comment, .userLeftBottom .likes, .userLeftBottom .fans, .userLeftBottom .favouriteArticle  {
-    background: wheat;
-    border-radius: 5px;
-}
-
-.article_contnet_footer i {
-    padding-left: 15px;
-}
-footer {
-	clear: both;
-    text-align: center;
-    margin: 20px 0 30px;
-    color: aliceblue;
-}
-#goTop {
-	width: 50px;
-    height: 50px;
-    position: fixed;
-    bottom: 30px;
-    right: 20px;
-    display: none;
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
-.deleteArticle, .editArticle {
-	float: right;
-}
-
-.descriptionContent {
-	padding: 10px 0;
-	color: white;
-}
-
-.editDescriptionContent textarea{
-	resize: none;
-	border: 2px solid wheat;
-	width: 100%;
-	color: black;
-}
-
-.editDescriptionContent .btn {
-	float: right;
-	margin: 5px 0px 5px 10px;
-}
-
-.editPersonDescription, .likeArticle span, .privateNote span {
-	cursor: pointer;
-}
-#list-container ul {
-	list-style-type: none;
-	padding-left: 10px;
-}
-
-#list-container ul li {
-	padding-top: 10px;
-	padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #f0f0f0;
-    line-height: normal;
-}
-#list-container .avator{
-	width: 52px;
-    height: 52px;
-    margin-right: 8px;
-    vertical-align: middle;
-    display: inline-block;
-}
-
-#list-container .avator img {
-	width: 100%;
-    height: 100%;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-}
-
-#list-container .info {
-	vertical-align: middle;
-    display: inline-block;
-    max-width: 450px;
-}
-
-#list-container .info .name {
-	font-size: 15px;
-    font-weight: 700;
-    color: #333;
-}
-
-#list-container .info .meta {
-	padding-top: 2px;
-    font-size: 12px;
-    color: #969696;
-}
-
-#list-container .info .meta span {
-	margin-right: 10px;
-    padding-right: 10px;
-    border-right: 1px solid #969696;
-    float: left;
-}
-
-#list-container .following {
-	float: right;
-    margin-top: 8px;
-    padding: 8px 0;
-    width: 100px;
-    font-size: 15px;
-    border-radius: 40px;
-    border: 1px solid hsla(0,0%,59%,.6);
-    margin-right: 10px;
-}
-
 header .loginAndRegiste {
 	text-align: left; color: white;
 	padding: 10px 0;
@@ -351,5 +116,82 @@ header ul li a{
 	text-align: left;
 	border-bottom: 1px dashed white;
 	cursor: pointer;
+}
+
+footer {
+	clear: both;
+    text-align: center;
+    margin: 20px 0 30px;
+    color: aliceblue;
+}
+#goTop {
+	width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    display: none;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.settingLeft {
+	float: left;
+	width: 30%;
+	padding: 10px 10px;
+}
+.settingLeft .setting_menu li {
+	list-style-type: none;
+    height: 52px;
+    line-height: 52px;
+    width: 250px;
+    font-size: 15px;
+    text-align: left;
+	cursor: pointer;
+	color: wheat;
+	padding-left: 10px;
+}
+.setting_menu {
+	padding: 20px 0;
+}
+.setting_menu li.active {
+	background-color: darkgray;
+	border-radius: 5px;
+}
+.settingRight {
+	float: left;
+	width: 70%;
+	padding: 10px 10px;
+}
+
+.avator-content {
+	padding: 20px 0;
+}
+
+.avator-content img{
+	width: 100px;
+	height: 100px;
+	border-radius: 100px;
+}
+.avator-content span {
+	margin-left: 20px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.setting-basic label {
+	line-height: 25px;
+	padding-left: 50px;
+}
+
+.setting-basic .col-sm-10 {
+	margin: 5px 0;
+}
+
+.saveSettingBasic {
+	margin-left: 50px;
 }
 

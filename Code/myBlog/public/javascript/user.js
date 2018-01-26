@@ -2,7 +2,8 @@ $(function(){
  //goTop的显示以及回到顶部
 $('#goTop').backtop();
 var user_id = location.search.substr(9);
-
+//修改登录的url
+$('#noLogin a').eq(0).attr('href','login.html?user_id='+user_id);
 $('.trigger-menu li').on('mouseenter', function(){
 		$(this).addClass('active');
 })
@@ -45,6 +46,66 @@ CookieParser = {
         }
     }
 };
+
+/*用户登录的操作*/
+if(CookieParser.getCookie('name')){
+	var name = CookieParser.getCookie('name')
+	$('#noLogin').hide();
+	$('#hasLogin').show();
+	$('#userName').text(decodeURIComponent(name));
+	$('#userName').parent().on('mouseover', function(){
+		$('.trigger-content').removeClass('hide');
+	});
+	$('#userName').parent().on('mouseout', function(){
+		$('.trigger-content').addClass('hide');
+	});
+	$('.trigger-content').on('mouseover',function(){
+		$(this).removeClass('hide');
+	});
+	$('.trigger-content').on('mouseout',function(){
+		$(this).addClass('hide');
+	});
+	$('#userName').parent().attr('href', 'user.html?user_id='+CookieParser.getCookie('author_id'));
+}
+
+$('.trigger-content li').on('click', function(){
+	if($(this).hasClass('myHome')){
+		location.href = 'user.html?user_id='+CookieParser.getCookie('author_id');
+	}else if($(this).hasClass('favouriteArticle')){
+		
+	}else if($(this).hasClass('helpAndCallback')){
+		
+	}else if($(this).hasClass('setting')){
+		location.href = 'setting.html?user_id='+CookieParser.getCookie('author_id');
+	}else if($(this).hasClass('loginOut')){
+		$('.trigger-content').addClass('hide');
+		$('#noLogin').show();
+		$('#hasLogin').hide();
+		$.ajax({
+			type:"post",
+			url:"../php/loginOut.php",
+			async:true,
+			success: function(result){
+				if(result.code == 200)
+				  location.reload();
+			}
+		});
+	}
+});
+//退出登录
+$('#loginOut').on('click', function(){
+	$('#noLogin').show();
+	$('#hasLogin').hide();
+	$.ajax({
+		type:"post",
+		url:"../php/loginOut.php",
+		async:true,
+		success: function(){
+			if(result.code == 200)
+				location.reload();
+		}
+	});
+});
 $.ajax({
 	type:"get",
 	url:"../php/user.php",
@@ -87,6 +148,11 @@ $.ajax({
 		}
 		//加关注/取消关注
 		$('.addLikes button').on('click', function(){
+			//校验是否登录
+	    	if(!CookieParser.getCookie('name')){
+	    		location.href = 'login.html?user_id='+ user_id;
+	    		return;
+	    	}
 			var type;
 			if($(this).hasClass('hasLiked')){
 				type = false;
@@ -127,6 +193,11 @@ $.ajax({
 				$(this).text('已关注').css({backgroundColor: '#e6e6e6'});
 			});
 			$('.addLikes').on('click', '.CancleAddLikes', function(){
+				//校验是否登录
+				if(!CookieParser.getCookie('name')){
+					location.href = 'login.html?user_id='+ user_id;
+					return;
+				}
 				type = false;
 				$(this).text('加关注').css({backgroundColor: '#42c02e',width: '80px'}).removeClass('CancleAddLikes').removeClass('hasLiked');
 				$.ajax({
@@ -288,6 +359,11 @@ function editOrDeleteArticle (result){
 	});
 	
 	function addLike(){
+		//校验是否登录
+    	if(!CookieParser.getCookie('name')){
+    		location.href = 'login.html?user_id='+ user_id;
+    		return;
+    	}
 		$('li').on('mouseover', '.hasLiked', function(){
 			$(this).text('X取消关注').css({backgroundColor: '#969696'});
 		})

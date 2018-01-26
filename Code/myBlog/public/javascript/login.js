@@ -2,6 +2,10 @@ if(location.search.indexOf('article_id') > -1){
 	var article_id = location.search.substr(12);
 	$('input[name=article_id]').val(article_id);
 }
+if(location.search.indexOf('user_id') > -1){
+	var user_id = location.search.substr(9);
+	$('input[name=user_id]').val(user_id);
+}
 //验证码
 $.idcode.setCode();
 
@@ -29,6 +33,7 @@ $('#loginContainer #loginSubmit').on('click', function(){
 	commitData.name = $("#loginContainer #name").val();
 	commitData.password = $("#loginContainer #password").val();
 	commitData.article_id =$('input[name=article_id]').val();
+	commitData.user_id =$('input[name=user_id]').val();
 	//验证非空
 	if(!commitData.name){
 		jAlert('请输入用户名');
