@@ -1,6 +1,6 @@
 $(function(){
 	var user_id = location.search.substr(9);
-	    
+	   
 	//操作cookie的方法
 	CookieParser = {
 	    setCookie: function (name, value, expireDays) {
@@ -26,7 +26,10 @@ $(function(){
 	        }
 	    }
 	};
-	
+	if(user_id != CookieParser.getCookie('author_id')){ //当前用户进入的不是自己的设置页面
+		jAlert('不可以进入别人的设置页面', '提示');
+		return;
+	}
 	/*用户登录的操作*/
 	if(CookieParser.getCookie('name')){
 		var name = CookieParser.getCookie('name')

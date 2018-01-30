@@ -1,7 +1,6 @@
 	<?php
-				include 'base.php';
+				include 'checkToken.php';
 				$article_id = $_POST['article_id'];
-				$author_id = $_POST['author_id'];
 				$author_name = $_POST['author_name'];
 				$like = $_POST['like'];
 				$currentNumAdd = $_POST['number'] + 1;

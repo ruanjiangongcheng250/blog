@@ -173,7 +173,7 @@ $.ajax({
 				'url': '../php/addLike.php',
 				'type': 'post',
 				'data': {
-					'userId': CookieParser.getCookie('author_id'), //当前登录用户Id
+					'author_id': CookieParser.getCookie('author_id'), //当前登录用户Id
 					'addLikesId': user_id, //要关注的用户id
 					'addLikeType': type //关注类型  true 为关注  false 为取消关注
 				},
@@ -204,9 +204,10 @@ $.ajax({
 					'url': '../php/addLike.php',
 					'type': 'post',
 					'data': {
-						'userId': CookieParser.getCookie('author_id'), //当前登录用户Id
+						'author_id': CookieParser.getCookie('author_id'), //当前登录用户Id
 						'addLikesId': user_id, //要关注的用户id
-						'addLikeType': type //关注类型  true 为关注  false 为取消关注
+						'addLikeType': type, //关注类型  true 为关注  false 为取消关注
+						'token': CookieParser.getCookie('token')
 					},
 					'success': function(result){
 						if(result.code == 200){
@@ -229,12 +230,20 @@ function editOrDeleteArticle (result){
 				    	var article_id = $(this).data('articleid');
 						$.ajax({
 							type:"post",
-							data: {id: article_id},
+							data: {
+								id: article_id,
+								ahthor_id: CookieParser.getCookie('author_id'),
+								token: CookieParser.getCookie('token')
+							},
 							url:"../php/deleteArticle.php",
 							async:true,
 							success:function(result){
 								if(result.code == 200){
 									$('article[data-articleid='+article_id+']').hide('slow');
+								}else{
+									jAlert('当前用户不合法，请重新登录', '提示', function(){
+				    					location.href = 'login.html';
+				    				});
 								}
 							}
 						});
@@ -270,10 +279,20 @@ function editOrDeleteArticle (result){
 			type:"post",
 			url:"../php/editDescription.php",
 			async:true,
-			data: {userId: user_id, description: description},
+			data: {
+				author_id: user_id,
+				description: description,
+				token: CookieParser.getCookie('token')
+			},
 			success: function(result){
-				$('.descriptionContent').text(result.description).removeClass('hide');
-				$('.editDescriptionContent').addClass('hide');
+				if(result.code == '200'){
+					$('.descriptionContent').text(result.description).removeClass('hide');
+					$('.editDescriptionContent').addClass('hide');
+				}else{
+					jAlert('当前用户不合法，请重新登录', '提示', function(){
+    					location.href = 'login.html';
+    				});
+				}
 			}
 		});
 	});
@@ -372,29 +391,37 @@ function editOrDeleteArticle (result){
 		})
 		$('li .following').on('click', function(){
 			var user_id = $(this).parent().data('userid');
+			var self = this;
 			var type;
 			if($(this).hasClass('hasLiked')){
 				type = false;
-				$(this).removeClass('hasLiked');
-				$(this).text('加关注');
-				$(this).parent().find('.info .fensi').text(parseInt($(this).parent().find('.info .fensi').text())-1);
 			}else{
 				type = true;
-				$(this).addClass('hasLiked');
-				$(this).text('已关注');
-				$(this).parent().find('.info .fensi').text(parseInt($(this).parent().find('.info .fensi').text())+1);
 			}
 			$.ajax({
 				'url': '../php/addLike.php',
 				'type': 'post',
 				'data': {
-					'userId': CookieParser.getCookie('author_id'), //当前登录用户Id
+					'author_id': CookieParser.getCookie('author_id'), //当前登录用户Id
 					'addLikesId': user_id, //要关注的用户id
 					'addLikeType': type //关注类型  true 为关注  false 为取消关注
 				},
 				'success': function(result){
 					if(result.code == 200){
-						
+						if($(self).hasClass('hasLiked')){
+							$(self).removeClass('hasLiked');
+							$(self).text('加关注');
+							$(self).parent().find('.info .fensi').text(parseInt($(this).parent().find('.info .fensi').text())-1);
+						}else{
+							$(self).addClass('hasLiked');
+							$(self).text('已关注');
+							$(self).parent().find('.info .fensi').text(parseInt($(this).parent().find('.info .fensi').text())+1);
+						}
+					}else{
+						jAlert('当前用户不合法，请重新登录', '提示', function(){
+	    					location.href = 'login.html';
+	    					return;
+	    				});
 					}
 				}
 			});

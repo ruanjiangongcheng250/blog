@@ -1,6 +1,6 @@
 	<?php
-				include 'base.php';
-				$userId = $_POST['userId'];
+				include 'checkToken.php';
+				$userId = $_POST['author_id'];
 				$addLikesId = $_POST['addLikesId'];
 				$addLikeType = $_POST['addLikeType'];
 				if($addLikeType == 'true'){

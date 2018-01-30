@@ -48,7 +48,9 @@ $(function() {
 		    		content: content,
 		    		currentNum: result[0].comment ? result[0].comment.length : 0,
 		    		author: decodeURIComponent(CookieParser.getCookie('name')),
-		    		author_avator: decodeURIComponent(CookieParser.getCookie('avator'))
+		    		author_avator: decodeURIComponent(CookieParser.getCookie('avator')),
+		    		author_id: decodeURIComponent(CookieParser.getCookie('author_id')),
+		    		token: CookieParser.getCookie('token')
 		    	}
 		    	$.ajax({
 		    		url: '../php/addComment.php',
@@ -75,6 +77,10 @@ $(function() {
 						    		}
 						    	})
 		    				});
+		    			}else{
+		    				jAlert('当前用户不合法，请重新登录', '提示', function(){
+		    					location.href = 'login.html';
+		    				});
 		    			}
 		    		}
 		    	})
@@ -85,6 +91,7 @@ $(function() {
 		    });
 		    //喜欢/不喜欢文章
 		    $('.article').on('click','#likeOrUnlike',function(){
+		    	var self = this;
 		    	//校验是否登录
 		    	if(!CookieParser.getCookie('name')){
 		    		location.href = 'login.html?article_id='+ article_id;
@@ -94,20 +101,13 @@ $(function() {
 		    	commitData.article_id = article_id;
 		    	commitData.author_id = CookieParser.getCookie('author_id');
 		    	commitData.author_name = CookieParser.getCookie('name');
+		    	commitData.token = CookieParser.getCookie('token');
 		    	commitData.number = $('#numberOfLikes').text();
 		    	if($(this).attr('src').indexOf('unlike') > -1){
-		    		$('#likeOrUnlike').attr('src','../icon/like.png');
 		    		commitData.like = true; //代表喜欢
-		    		$('#numberOfLikes').text(parseInt($('#numberOfLikes').text())+1);
-		    		likesofarticle.push(article_id);
 		    	}else{
-		    		$('#likeOrUnlike').attr('src','../icon/unlike.png');
-		    		$('#numberOfLikes').text($('#numberOfLikes').text()-1);
 		    		commitData.like = false;
-		    		var index = likesofarticle.indexOf(article_id);
-		    		likesofarticle.splice(index,1);
 		    	}
-		    	CookieParser.setCookie('likesofarticle',likesofarticle.join(','));
 		    	//调用服务
 		    	$.ajax({
 		    		type:"post",
@@ -115,7 +115,24 @@ $(function() {
 		    		async:true,
 		    		data: commitData,
 		    		success: function(result){
-		    			
+		    			if(result.code == '200'){
+					    	if($(self).attr('src').indexOf('unlike') > -1){
+					    		$('#likeOrUnlike').attr('src','../icon/like.png');
+					    		$('#numberOfLikes').text(parseInt($('#numberOfLikes').text())+1);
+					    		likesofarticle.push(article_id);
+					    	}else{
+					    		$('#likeOrUnlike').attr('src','../icon/unlike.png');
+					    		$('#numberOfLikes').text($('#numberOfLikes').text()-1);
+					    		var index = likesofarticle.indexOf(article_id);
+					    		likesofarticle.splice(index,1);
+					    	}
+		    				CookieParser.setCookie('likesofarticle',likesofarticle.join(','));
+		    			}else{
+		    				jAlert(result.message+',请重新登录', '提示', function(){
+		    					location.href = 'login.html';
+		    					return;
+		    				});
+		    			}
 		    		}
 		    	});
 		    });

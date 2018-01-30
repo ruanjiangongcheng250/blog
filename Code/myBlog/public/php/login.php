@@ -10,9 +10,13 @@
 					$author_id = $row->id;
 				}
 				if(mysql_num_rows($result)){
+					/*生成随机数，当做token,存在服务端*/
+					$token = rand().rand().rand();
+					setcookie('token', $token,time()+36000,'/');
 					setcookie('name', $name,time()+36000,'/');
 					setcookie('avator', $author_avator,time()+36000,'/');
 					setcookie('author_id', $author_id,time()+36000,'/');
+					mysql_query("UPDATE `user` SET `token` = '$token'  WHERE `user`.`id` = '$author_id'");
 					$resultOfLikes = mysql_query("SELECT * FROM `likesofarticle` WHERE author_id='$author_id'");
 					$arrLikes = array();
 					while($row = mysql_fetch_array($resultOfLikes)){
