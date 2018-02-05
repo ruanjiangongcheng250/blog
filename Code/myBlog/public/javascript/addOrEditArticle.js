@@ -85,6 +85,8 @@ $('#saveArticle').on('click', function(){
 	var commitData = {};
 	commitData.id = article_id;
 	commitData.author = CookieParser.getCookie('name');
+	commitData.author_id = CookieParser.getCookie('author_id');
+	commitData.token = CookieParser.getCookie('token');
 	commitData.name = $('.addOrEditArticle #name').val();
 	commitData.time = $('.addOrEditArticle #time').val();
 	commitData.type = $('.article_label .btn-danger').data('type');
@@ -119,6 +121,10 @@ $('#saveArticle').on('click', function(){
 		success: function(result){
 			if(result.code == 200){
 				location.href = 'index.html';
+			}else{
+				jAlert('当前用户不合法，请重新登录', '提示', function(){
+					location.href = 'login.html';
+				});
 			}
 		}
 	});

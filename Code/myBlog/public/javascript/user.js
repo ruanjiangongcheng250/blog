@@ -1,7 +1,7 @@
 $(function(){
  //goTop的显示以及回到顶部
 $('#goTop').backtop();
-var user_id = location.search.substr(9);
+var user_id = parseInt(location.search.substr(9));
 //修改登录的url
 $('#noLogin a').eq(0).attr('href','login.html?user_id='+user_id);
 $('.trigger-menu li').on('mouseenter', function(){
@@ -72,7 +72,7 @@ $('.trigger-content li').on('click', function(){
 	if($(this).hasClass('myHome')){
 		location.href = 'user.html?user_id='+CookieParser.getCookie('author_id');
 	}else if($(this).hasClass('favouriteArticle')){
-		
+		location.href = 'user.html?user_id='+CookieParser.getCookie('author_id')+'&type=favourite';
 	}else if($(this).hasClass('helpAndCallback')){
 		
 	}else if($(this).hasClass('setting')){
@@ -217,6 +217,9 @@ $.ajax({
 				});
 			});
 		}
+		if(location.href.indexOf('favourite')>-1){
+			$('.likeArticle').trigger('click');
+		}
 	}
 });
 
@@ -313,7 +316,7 @@ function editOrDeleteArticle (result){
 			data: {articleArr: articleArr},
 			success: function(result){
 				var articleTplHtml = template('articleTpl', {data: result});
-				$('.favouriteArticle').html(articleTplHtml);
+				$('div.favouriteArticle').html(articleTplHtml);
 			}
 		});
 		$('.articleSection').addClass('hide');

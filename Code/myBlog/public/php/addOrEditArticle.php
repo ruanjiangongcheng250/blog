@@ -1,5 +1,5 @@
 <?php
-				include 'base.php';
+				include 'checkToken.php';
 				$id = $_POST['id'];
 				$name = $_POST['name'];
 				$time = $_POST['time'];

@@ -139,7 +139,7 @@ $(function() {
 		if($(this).hasClass('myHome')){
 			location.href = 'user.html?user_id='+CookieParser.getCookie('author_id');
 		}else if($(this).hasClass('favouriteArticle')){
-			
+			location.href = 'user.html?user_id='+CookieParser.getCookie('author_id')+'&type=favourite';
 		}else if($(this).hasClass('helpAndCallback')){
 			
 		}else if($(this).hasClass('setting')){
@@ -172,6 +172,10 @@ $(function() {
 		});
 	});
 	
+	if(location.href.indexOf('favourite')>-1){
+		$('.likeArticle').trigger('click');
+	}
+	
 	//搜索文章
 	$('#search').on('click', function(){
 		var type = $('header ul li').children('a.active').data('name');
@@ -203,12 +207,20 @@ $(function() {
 				    	var article_id = $(this).data('articleid');
 						$.ajax({
 							type:"post",
-							data: {id: article_id},
+							data: {
+								id: article_id,
+								author_id: CookieParser.getCookie('author_id'),
+								token: CookieParser.getCookie('token')
+							},
 							url:"../php/deleteArticle.php",
 							async:true,
 							success:function(result){
 								if(result.code == 200){
 									$('article[data-articleid='+article_id+']').hide('slow');
+								}else{
+									jAlert('当前用户不合法，请重新登录', '提示', function(){
+				    					location.href = 'login.html';
+				    				});
 								}
 							}
 						});

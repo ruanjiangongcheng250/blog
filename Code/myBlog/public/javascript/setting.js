@@ -55,7 +55,7 @@ $(function(){
 		if($(this).hasClass('myHome')){
 			location.href = 'user.html?user_id='+CookieParser.getCookie('author_id');
 		}else if($(this).hasClass('favouriteArticle')){
-			
+			location.href = 'user.html?user_id='+CookieParser.getCookie('author_id')+'&type=favourite';
 		}else if($(this).hasClass('helpAndCallback')){
 			
 		}else if($(this).hasClass('setting')){
@@ -119,7 +119,14 @@ $(function(){
 			        			type:"post",
 			        			url:"../php/saveBasicSetting.php",
 			        			async:true,
-			        			data: {id: user_id, avator: result.imageName},
+			        			data: {
+			        				author_id: user_id,
+			        				avator: result.imageName,
+			        				token: CookieParser.getCookie('token'),
+			        				mobile: $('#mobile').val(),
+			        				email: $('#email').val(),
+			        				name: $('#nickName').val(),
+			        			},
 			        			success: function(){
 			        				jAlert('头像更改成功','提示');
 			        			}
@@ -131,10 +138,34 @@ $(function(){
 			    }
 			    reader.readAsDataURL(file.target.files[0]);
 			});
+			if(location.href.indexOf('favourite')>-1){
+				$('.likeArticle').trigger('click');
+			}
 			
 			/*保存*/
 			$('.saveSettingBasic').on('click', function(){
-				
+				$.ajax({
+        			type:"post",
+        			url:"../php/saveBasicSetting.php",
+        			async:true,
+        			data: {
+        				author_id: user_id,
+        				token: CookieParser.getCookie('token'),
+        				mobile: $('#mobile').val(),
+        				email: $('#email').val(),
+        				name: $('#nickName').val(),
+        				avator: ''
+        			},
+        			success: function(result){
+        				if(result.code == 200){
+        					jAlert('更改成功','提示');
+        				}else{
+        					jAlert(result.message, '提示', function(){
+        						location.reload();
+        					});
+        				}
+        			}
+        		});
 			});
 		}
 	});

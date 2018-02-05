@@ -178,6 +178,9 @@ $(function() {
 		    		}
 		    	});
 		    });
+			if(location.href.indexOf('favourite')>-1){
+				$('.likeArticle').trigger('click');
+			}
     	}
     });
     
@@ -270,7 +273,7 @@ $(function() {
 		if($(this).hasClass('myHome')){
 			location.href = 'user.html?user_id='+CookieParser.getCookie('author_id');
 		}else if($(this).hasClass('favouriteArticle')){
-			
+			location.href = 'user.html?user_id='+CookieParser.getCookie('author_id')+'&type=favourite';
 		}else if($(this).hasClass('helpAndCallback')){
 			
 		}else if($(this).hasClass('setting')){
