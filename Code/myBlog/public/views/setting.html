@@ -38,7 +38,7 @@
 					
 				</div>
 				<div class="setting-profile hide">
-					setting-profile hide
+					
 				</div>
 			</div>
 			<script type="text/html" id="settingBasic">
@@ -63,6 +63,57 @@
 					<input type="text" name="mobile" id="mobile" class="form-control" value="{{data.mobile}}">
 				</div>
 				<button class="btn btn-default saveSettingBasic">保存</button>
+			</script>
+			<script type="text/html" id="settingProfile">
+				<div class="wechat">
+					<div>
+						<b class="col-sm-2  control-label" style="line-height: 84px;">微信二维码:</b>
+						{{if data.wechatImage}}
+							<img class="wechatImage" src="{{data.wechatImage}}" data-src="{{data.wechatImage}}"/> 
+						{{else}}
+							<img class="wechatImage hide" src="../image/delete.jpg" /> 
+						{{/if}}
+						<span id="changeWechatIamge">更改图片</span>
+						<form  id= "upload_form1" style="display: inline"  enctype="multipart/form-data">
+							<input type="file" name="file" data-userid={{data.id}} style="width: 76px; position: relative;left: -75px;opacity: 0; display: inline;"> 
+						</form>
+						<b class="" style="line-height: 84px; color: wheat; font-size: 12px; float: right;" >在个人主页显示二维码</b>
+					</div>
+				</div>
+				<label for="sex" class=" col-sm-2  control-label" >性别：</label>
+				<div class="col-sm-10">
+					<label class="radio-inline">
+						{{if data.sex == '1'}}
+							<input type="radio" name="sex"  value="1" checked>男
+						{{else}}
+							<input type="radio" name="sex"  value="1">男
+						{{/if}}
+					</label>
+					<label class="radio-inline">
+						{{if data.sex == '0'}}
+							<input type="radio" name="sex"  value="0" checked>女
+						{{else}}
+							<input type="radio" name="sex"  value="0">女
+						{{/if}}
+					</label>
+					<label class="radio-inline">
+						{{if data.sex == '2'}}
+							<input type="radio" name="sex" value="2" checked>保密
+						{{else}}
+							<input type="radio" name="sex" value="2">保密
+						{{/if}}
+					</label>
+				</div>
+				<label for="description" class=" col-sm-2  control-label" >简介：</label>
+				<div class="col-sm-10">
+					<textarea type="text" name="description" id="description" class="form-control" >{{data.description}}</textarea>
+				</div>
+				<label for="website" class=" col-sm-2  control-label" >网站：</label>
+				<div class="col-sm-10">
+					<input type="text" name="website" id="website" class="form-control" value="{{data.website}}" placeholder="http://zackon.cn">
+				</div>
+				<p style="float: right; color: wheat; font-size: 12px; margin-right: 15px;">填写后会在个人主页显示图标</p>
+				<button class="btn btn-default saveSettingProfile">保存</button>
 			</script>
 		</section>
 		<footer>

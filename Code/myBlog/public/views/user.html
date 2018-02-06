@@ -78,7 +78,7 @@
 		    	<div class='useDdescription'>
 		    		<p> <span>个人介绍</span><span class="editPersonDescription" style="float: right;"><i class="icon iconfont">&#xe74a;</i>&nbsp;编辑</span></p>
 		    		<div class="descriptionContent">
-		    			lallalalaa
+		    			
 		    		</div>
 		    		<div class="editDescriptionContent hide">
 		    			<textarea></textarea>
@@ -157,11 +157,12 @@
 	    	    			<!--
                             	作者：zhangtaos@yonyou.com
                             	时间：2018-01-10
-                            	描述：sex为1 为男  0 为女
+                            	描述：sex为1 为男  0 为女 2为保密  默认值为2
                             -->
 	    	    			{{if data.sex==1}}
 	    	    		    	<i class="icon iconfont" style="color: white;">&#xe605</i>
-	    	    		    {{else}}
+	    	    		    {{/if}}
+	    	    		    {{if data.sex==0}}
 	    	    		    	<i class="icon iconfont" style="color: white;">&#xe607</i>
 	    	    		    {{/if}}
 	    	    		</span>

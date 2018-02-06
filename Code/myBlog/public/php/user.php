@@ -61,6 +61,8 @@
 	    	'name'=> $row->name,
 	    	'sex'=> $row->sex,
 	    	'description'=> $row->description,
+	    	'wechatImage'=> $row->wechatImage,
+	    	'website'=> $row->website,
 	    	'mobile'=> $row->mobile,
 	    	'fans' => $fansArr,
 	    	'likes' => $likesArr,
