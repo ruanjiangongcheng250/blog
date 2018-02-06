@@ -135,6 +135,16 @@ $.ajax({
 		$('.userLeftTop').html(userLeftTopTplHtml);
 		editOrDeleteArticle(result.articles);
 		$('.descriptionContent').text(result.description || '一句话介绍你自己。。。');
+		if(result.website){
+			$('#personalWebsite').attr('href', result.website);
+		}else{
+			$('#personalWebsite').addClass('hide');
+		}
+		if(result.wechatImage){
+			$('.personalWechatImage img').attr('src', result.wechatImage);
+		}else{
+			$('#wechatIcon').addClass('hide');
+		}
 		//当前主页是否为当前登录用户的主页
 		if(user_id == CookieParser.getCookie('author_id')){
 			//去掉关注按钮
@@ -146,6 +156,14 @@ $.ajax({
 			$('.deleteArticle, .editArticle').addClass('hide');
 			$('.likeArticle span').text('他/她喜欢的文章');
 		}
+		
+		//微信二维码 的显示隐藏
+		$('#wechatIcon').on("mouseenter", function(){
+			$(".personalWechatImage").removeClass('hide');
+		});
+		$('#wechatIcon').on("mouseleave", function(){
+			$(".personalWechatImage").addClass('hide');
+		});
 		//加关注/取消关注
 		$('.addLikes button').on('click', function(){
 			//校验是否登录
