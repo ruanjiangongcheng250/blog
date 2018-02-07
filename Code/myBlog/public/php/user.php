@@ -15,6 +15,7 @@
     	$article = mysql_query("SELECT * FROM article WHERE author = '".$row->name."'");
     	$articleArr = array();
     	$wordNumber = 0;
+    	$getLikes = 0;
     	while($articleRow = mysql_fetch_array($article)){
     		$arrComment = array();
     		$resultComment = mysql_query("SELECT * FROM comment WHERE article_id = '".$articleRow['id']."'");
@@ -53,6 +54,9 @@
     			if($key == 'wordNumber'){
     				$wordNumber += $value;
     			}
+    			if($key == 'likes'){
+    				$getLikes += count($value);
+    			}
     		}
     	}
     	$arr = array(
@@ -68,6 +72,7 @@
 	    	'likes' => $likesArr,
 	    	'mail' => $row->mail,
 	    	'wordNumber'=> $wordNumber,
+	    	'getLikes'=> $getLikes,
 	    	'articles' => $articleArr
 	    );
     }

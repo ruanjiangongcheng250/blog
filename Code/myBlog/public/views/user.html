@@ -89,7 +89,7 @@
 		    		</div>
 		    		  <span><a id="personalWebsite" style="color: wheat;"><i class="icon iconfont">&#xe658;</i></a></span>
 		    		  <span id="wechatIcon"><i class="icon iconfont">&#xe709;</i></span>
-		    		  <div class="personalWechatImage hide" style="position: relative; left: -10px;">
+		    		  <div class="personalWechatImage hide" style="position: absolute;">
 		    		  	<img class="hoverWechatImage" />
 		    		  </div>
 		    		<hr>
@@ -213,7 +213,7 @@
 		    						<span style="border-right: 0px;">文章 {{$value.articles.length}}</span>
 		    					</div>
 		    					<div class="meta" style="clear: both;">
-							      	写了 {{$value.wordNumber}} 字，获得了 2947 个喜欢
+							      	写了 {{$value.wordNumber}} 字，获得了{{$value.getLikes}}个喜欢
 							    </div>
 		    				</div>
 		    				{{if $value.hasLiked}}
@@ -248,7 +248,7 @@
 		    						<span style="border-right: 0px;">文章 {{$value.articles.length}}</span>
 		    					</div>
 		    					<div class="meta" style="clear: both;">
-							      	写了 {{$value.wordNumber}} 字，获得了 2947 个喜欢
+							      	写了 {{$value.wordNumber}} 字，获得了{{$value.getLikes}}个喜欢
 							    </div>
 		    				</div>
 		    					{{if $value.hasLiked}}

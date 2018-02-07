@@ -193,7 +193,8 @@ $.ajax({
 				'data': {
 					'author_id': CookieParser.getCookie('author_id'), //当前登录用户Id
 					'addLikesId': user_id, //要关注的用户id
-					'addLikeType': type //关注类型  true 为关注  false 为取消关注
+					'addLikeType': type, //关注类型  true 为关注  false 为取消关注
+					'token': CookieParser.getCookie('token')
 				},
 				'success': function(result){
 					if(result.code == 200){
@@ -425,18 +426,19 @@ function editOrDeleteArticle (result){
 				'data': {
 					'author_id': CookieParser.getCookie('author_id'), //当前登录用户Id
 					'addLikesId': user_id, //要关注的用户id
-					'addLikeType': type //关注类型  true 为关注  false 为取消关注
+					'addLikeType': type, //关注类型  true 为关注  false 为取消关注
+					'token': CookieParser.getCookie('token')
 				},
 				'success': function(result){
 					if(result.code == 200){
 						if($(self).hasClass('hasLiked')){
 							$(self).removeClass('hasLiked');
 							$(self).text('加关注');
-							$(self).parent().find('.info .fensi').text(parseInt($(this).parent().find('.info .fensi').text())-1);
+							$(self).parent().find('.info .fensi').text(parseInt($(self).parent().find('.info .fensi').text())-1);
 						}else{
 							$(self).addClass('hasLiked');
 							$(self).text('已关注');
-							$(self).parent().find('.info .fensi').text(parseInt($(this).parent().find('.info .fensi').text())+1);
+							$(self).parent().find('.info .fensi').text(parseInt($(self).parent().find('.info .fensi').text())+1);
 						}
 					}else{
 						jAlert('当前用户不合法，请重新登录', '提示', function(){
