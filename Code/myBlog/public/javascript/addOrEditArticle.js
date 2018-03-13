@@ -91,6 +91,8 @@ $('#saveArticle').on('click', function(){
 	commitData.time = $('.addOrEditArticle #time').val();
 	commitData.type = $('.article_label .btn-danger').data('type');
 	commitData.content = UE.getEditor('editor').getContent();
+	commitData.contentTxt = UE.getEditor('editor').getContentTxt();
+	commitData.plainTxt = UE.getEditor('editor').getPlainTxt();
 	commitData.wordNumber = UE.getEditor('editor').getContentTxt().length;
 	commitData.description = UE.getEditor('editor').getContentTxt().substr(0,200);
 	//验证题目，类型，内容，日期不能为空, 纯文本内容不能少于200字符

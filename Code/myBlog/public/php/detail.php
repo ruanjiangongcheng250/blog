@@ -36,6 +36,9 @@
 										  'watch'=> $row['watch'],
 										  'type'=> $row['type'],
 										  'content'=> $row['content'],
+										  'contentTxt'=> $row['contentTxt'],
+										  'plainTxt'=> $row['plainTxt'],
+										  'wordNumber'=> $row['wordNumber'],
 										  'comment'=> $arrComment,
 										  'likes'=> $arrLikes
 										  ));
