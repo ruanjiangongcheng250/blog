@@ -254,7 +254,7 @@ function editOrDeleteArticle (result){
 							type:"post",
 							data: {
 								id: article_id,
-								ahthor_id: CookieParser.getCookie('author_id'),
+								author_id: CookieParser.getCookie('author_id'),
 								token: CookieParser.getCookie('token')
 							},
 							url:"../php/deleteArticle.php",

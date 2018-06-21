@@ -48,7 +48,7 @@ $('#loginContainer #loginSubmit').on('click', function(){
 		return;
 	}
 	//验证验证码
-	if(!$.idcode.validateCode() && $('#validateCode').val() != '11111'){
+	if(!$.idcode.validateCode() && $('#validateCode').val() != '8dxjt'){
 		jAlert('验证码输入错误','提示');
 		return;
 	}
