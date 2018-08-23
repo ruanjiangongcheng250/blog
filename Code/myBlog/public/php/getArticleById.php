@@ -10,7 +10,8 @@
 										  'time'=> $row['time'], 
 										  'author'=> $row['author'], 
 										  'type'=> $row['type'],
-										  'content'=> $row['content']
+										  'content'=> $row['content'],
+										  'isPrivate'=> $row['isPrivate']
 										  ));
 				}  
 				echo json_encode($arr, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT); 

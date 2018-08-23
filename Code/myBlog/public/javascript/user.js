@@ -100,7 +100,7 @@ $('#loginOut').on('click', function(){
 		type:"post",
 		url:"../php/loginOut.php",
 		async:true,
-		success: function(){
+		success: function(result){
 			if(result.code == 200)
 				location.reload();
 		}
@@ -131,8 +131,10 @@ $.ajax({
 		}
 		var articleTplHtml = template('articleTpl', {data: result.articles});
 		var userLeftTopTplHtml = template('userLeftTopTpl', {data: result});
+		var privateNoteHtml = template('articleTpl', {data: result.notes})
 		$('.article').html(articleTplHtml);
 		$('.userLeftTop').html(userLeftTopTplHtml);
+		$('.myNote').html(privateNoteHtml);
 		editOrDeleteArticle(result.articles);
 		$('.descriptionContent').text(result.description || '一句话介绍你自己。。。');
 		if(result.website){
@@ -149,12 +151,16 @@ $.ajax({
 		if(user_id == CookieParser.getCookie('author_id')){
 			//去掉关注按钮
 			$('.addLikes').addClass('hide');
+			//显示我的文集
+			$('.privateNote').removeClass('hide')
 		}else{
 			//不可编辑个人介绍
 			$('.editPersonDescription').addClass('hide');
 			//不可删除/编辑
 			$('.deleteArticle, .editArticle').addClass('hide');
 			$('.likeArticle span').text('他/她喜欢的文章');
+			//隐藏我的文集
+			$('.privateNote').addClass('hide')
 		}
 		
 		//微信二维码 的显示隐藏
@@ -340,9 +346,16 @@ function editOrDeleteArticle (result){
 		});
 		$('.articleSection').addClass('hide');
 		$('.userSection').addClass('hide');
+		$('.PrivateSection').addClass('hide');
 		$('.likeSection').removeClass('hide');
 	});
-	
+	//日记本
+	$('body').on('click', '.note', function(){
+		$('.articleSection').addClass('hide');
+		$('.userSection').addClass('hide');
+		$('.likeSection').addClass('hide');
+		$('.PrivateSection').removeClass('hide');
+	})
 	$('body').on('click','.nameAndInfo li', function(e){
 		if($(this).hasClass('li_fans') || $(this).hasClass('li_likes')){
 			$('.userSection').removeClass('hide');

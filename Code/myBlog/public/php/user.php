@@ -12,8 +12,10 @@
     	array_push($likesArr, $likesRow['likesId']);
     }
     while($row = mysql_fetch_object($result)){
-    	$article = mysql_query("SELECT * FROM article WHERE author = '".$row->name."'");
-    	$articleArr = array();
+    	$article = mysql_query("SELECT * FROM article WHERE isPrivate = 0 AND author = '".$row->name."'"); //非私密文章
+    	$note = mysql_query("SELECT * FROM article WHERE isPrivate = 1 AND author = '".$row->name."'"); //私密文章
+		$articleArr = array();
+		$noteArr = array();
     	$wordNumber = 0;
     	$getLikes = 0;
     	while($articleRow = mysql_fetch_array($article)){
@@ -48,6 +50,20 @@
 				  'comment'=>$arrComment,
 				  'likes'=> $arrLikes
     		));
+		}
+		while($noteRow = mysql_fetch_array($note)){
+    		array_push($noteArr, array(
+    		      'id'=> $noteRow['id'], 
+				  'name'=> $noteRow['name'], 
+				  'description'=> $noteRow['description'], 
+				  'time'=> $noteRow['time'], 
+				  'author'=> $noteRow['author'], 
+				  'type'=> $noteRow['type'],
+				  'wordNumber'=>$noteRow['wordNumber'],
+				  'avator'=> $row->avator,
+				  'comment'=> [],
+				  'likes'=> []
+    		));
     	}
     	for($x=0; $x<count($articleArr); $x++){
     		foreach($articleArr[$x] as $key=> $value){
@@ -73,7 +89,8 @@
 	    	'mail' => $row->mail,
 	    	'wordNumber'=> $wordNumber,
 	    	'getLikes'=> $getLikes,
-	    	'articles' => $articleArr
+			'articles' => $articleArr,
+			'notes' => $noteArr
 	    );
     }
     

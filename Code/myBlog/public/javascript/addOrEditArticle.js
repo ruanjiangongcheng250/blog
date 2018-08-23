@@ -66,11 +66,15 @@ if(article_id){ //编辑文章  需要回写之前的内容
 			var label = result[0].type;
 			var title = result[0].name;
 			var time = result[0].time;
+			var isPrivate = result[0].isPrivate;
 			setTimeout(function(){
 				UE.getEditor('editor').execCommand('insertHtml', content);
 				$('.article_label .'+label).addClass('btn-danger');
 				$('.addOrEditArticle #name').val(title);
 				$('.addOrEditArticle #time').val(time);
+				if(isPrivate == 1){
+					$('.isPrivate').prop('checked', true);
+				}
 			},500);
 		}
 	});
@@ -93,6 +97,7 @@ $('#saveArticle').on('click', function(){
 	commitData.content = UE.getEditor('editor').getContent();
 	commitData.wordNumber = UE.getEditor('editor').getContentTxt().length;
 	commitData.description = UE.getEditor('editor').getContentTxt().substr(0,200);
+	commitData.isPrivate = $('.isPrivate').prop('checked') ? 1 : 0;
 	//验证题目，类型，内容，日期不能为空, 纯文本内容不能少于200字符
 	if(!commitData.name){
 		jAlert('文章题目不能为空', '提示');

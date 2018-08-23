@@ -2,15 +2,15 @@
                 include 'base.php';
 				if($_GET['type']){
 					if($_GET['keyword']){
-						$result = mysql_query("SELECT * FROM article WHERE type = '".$_GET['type']."' and (name like '%".$_GET['keyword']."%' OR author like '%".$_GET['keyword']."%') ORDER BY time DESC");
+						$result = mysql_query("SELECT * FROM article WHERE isPrivate = 0 AND type = '".$_GET['type']."' and (name like '%".$_GET['keyword']."%' OR author like '%".$_GET['keyword']."%') ORDER BY time DESC");
 					}else{
-						$result = mysql_query("SELECT * FROM article WHERE type = '".$_GET['type']."' ORDER BY time DESC");
+						$result = mysql_query("SELECT * FROM article WHERE isPrivate = 0 AND type = '".$_GET['type']."' ORDER BY time DESC");
 					}
 				}else{
 					if($_GET['keyword']){
-						$result = mysql_query("SELECT * FROM article WHERE name like '%".$_GET['keyword']."%' OR author like '%".$_GET['keyword']."%' ORDER BY time DESC");
+						$result = mysql_query("SELECT * FROM article WHERE isPrivate = 0 AND name like '%".$_GET['keyword']."%' OR author like '%".$_GET['keyword']."%' ORDER BY time DESC");
 					}else{
-						$result = mysql_query("SELECT * FROM article ORDER BY time DESC");
+						$result = mysql_query("SELECT * FROM article WHERE isPrivate = 0 ORDER BY time DESC");
 					}
 				}
 				$arr = array();
