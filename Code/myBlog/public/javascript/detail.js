@@ -17,7 +17,14 @@ $(function() {
     	type: 'get',
     	data: {id: article_id, timeOrder: 0},
     	success: function(result){
-    		loadingHide();
+			loadingHide();
+			//私密文章通过修改链接id进入
+			if(result[0] && result[0].isPrivate == "1" && result[0].author != CookieParser.getCookie('name')){
+				jAlert('该文章不存在或该文章为私密文章', '提示', function(){
+					location.href = 'index.html'
+				});
+				return;
+			}
     		var likesofarticle = CookieParser.getCookie('likesofarticle') ? decodeURIComponent(CookieParser.getCookie('likesofarticle')).split(',') : [];
     		for(var i =0; i<likesofarticle.length; i++){
     			if(likesofarticle[i] == article_id){ //说明当前用户已经喜欢了此文章

@@ -37,6 +37,7 @@
 										  'type'=> $row['type'],
 										  'content'=> $row['content'],
 										  'wordNumber'=> $row['wordNumber'],
+										  'isPrivate'=> $row['isPrivate'],
 										  'comment'=> $arrComment,
 										  'likes'=> $arrLikes
 										  ));
