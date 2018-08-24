@@ -342,6 +342,8 @@ function editOrDeleteArticle (result){
 			success: function(result){
 				var articleTplHtml = template('articleTpl', {data: result});
 				$('div.favouriteArticle').html(articleTplHtml);
+				//不可删除/编辑
+				$('.favouriteArticle .deleteArticle,.favouriteArticle .editArticle').addClass('hide');
 			}
 		});
 		$('.articleSection').addClass('hide');
