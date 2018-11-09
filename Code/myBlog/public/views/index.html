@@ -48,27 +48,6 @@
 	        <div class="article">
             </div>
            <div class="image hide">
-           	  <div class="imageContent">
-	           	  <a>
-	           	  	<img data-original="../image/me1.jpg" class="lazy"/>
-	           	  </a>
-	           	  <div class="image_footer">
-	           	  	<p>
-	           	  	  2017-03-11 星期六   凤凰岭  <br>
-同游者：  贺鹏桦 ，杨娅娅， 刘贝贝<br>
-	           	    </p>
-	           	  </div>
-           	  </div>
-           	  <div class="imageContent">
-	           	  <a>
-	           	  	<img data-original="../image/me2.jpg" class="lazy"/>
-	           	  </a>
-	           	  <div class="image_footer">
-	           	  	<p>
-	           	  	  2017-05-16 星期二   用友体育馆  <br><br>
-	           	    </p>
-	           	  </div>
-           	  </div>
            </div>
            <div class="healthCare hide">
            </div>
@@ -122,7 +101,25 @@
 	           	{{else}}
 	           	     <p style="color: white;">暂无文章...</p>
 	           	{{/if}}
-           </script> 
+		   </script> 
+		   <script id="pictureTpl" type="text/html">
+			  {{if data[0]}}
+			    {{each data}}
+					<div class="imageContent">
+						<a>
+							<img  data-original="{{$value.imgUrl}}" class="lazy"/>
+						</a>
+						<div class="image_footer">
+							<p style="color: #fff">
+								{{$value.imgDate}}  {{$value.imgAddress}} 
+							</p>
+						</div>
+					</div>
+				{{/each}}
+			  {{else}}
+			  	<p style="color: white;">暂无相册...</p>
+			  {{/if}}
+		   </script>
         </section>
         <footer>
         	<hr>

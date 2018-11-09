@@ -252,10 +252,19 @@ section .article_likes {
 }
 
 .image {
-  text-align: center;	
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 .imageContent {
 	border-bottom: 1px dotted #7f9397;
+	width: 200px;
+	height: 350px;
+}
+.imageContent :hover {
+	border: 1px solid #fff;
+	transform: scale(1.1);
+	transition: all 0.5s ease-in;
 }
 .image img {
 	border: 6px solid rgba(255,255,255,0.15);

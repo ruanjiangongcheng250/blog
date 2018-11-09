@@ -1,10 +1,5 @@
 //index.js
 $(function() {
-	//图片懒加载
-    $("img.lazy").lazyload({
-    	effect : "fadeIn",
-    	threshold : 200
-    });
     //goTop的显示以及回到顶部
     $('#goTop').backtop();
     //选项卡的切换
@@ -23,15 +18,68 @@ $(function() {
     	url:'../php/index.php',
     	data: {type: type, keyword: null},
     	type: 'get',
-    	success: function(result){
-    		var html = template('articleTpl', {data:result}); 
-			$('.'+type).html(html);
-			editOrDeleteArticle(result);
+		success: function(result){
+			if(type === 'picture'){
+				result = [{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},
+			{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},
+			{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},
+			{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},
+			{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},
+			{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me2.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}
+			,{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'},{imgUrl: 'http://zackon.cn/image/me1.jpg', imgDate: '2017-3-15', imgAddress: '凤凰岭'}]
+				var html = template('pictureTpl', {data:result}); 
+				$('.image').html(html);
+				eventRegister();
+			}else{
+				var html = template('articleTpl', {data:result}); 
+				$('.'+type).html(html);
+					//图片懒加载
+				editOrDeleteArticle(result);
+			}
     	}
     });
     });
     
-   
+   function eventRegister(){
+	 $("img.lazy").lazyload({
+		effect : "fadeIn",
+		threshold : 200
+	 });
+	 $('.imageContent').on('click', function(e){
+		var div = document.createElement('div');
+		var close = document.createElement('div');
+		$(close).css({position: 'absolute', right: 0, top: 0, color: '#fff'}).html('关闭').addClass('close');
+		var img = document.createElement('img');
+		img.src = e.target.src;
+		$(div).css({position: 'fixed', top:0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.6)'}).append(close);
+		$('body').append(div).append(img).css({overflowY: 'hidden'});
+		$(img).css({position: 'fixed', width: ($(e.target).width() * 4) + 'px', height: ($(e.target).height() * 4) + 'px',top: '30px', left:'35%', zIndex:1, margin: '30px auto'});
+		$(close).on('click',function(){
+			$(div).remove();
+			$(img).remove();
+			$('body').css({overflowY: 'auto'})
+		})
+	 })
+   }
     loadingShow();
     //获取首页数据
     $.ajax({
